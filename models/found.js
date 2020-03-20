@@ -35,6 +35,7 @@ const foundSchema = mongoose.Schema({
     },
     requireReward: {
         type: Boolean,
+        required: true,
         default: false
     }
 

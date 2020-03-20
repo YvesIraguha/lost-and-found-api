@@ -22,4 +22,4 @@ mongoose.connect(process.env.DB_CONNECT,
     () => console.log('connected to database'));
 
 app.listen(port, 
-    ()=> console.log(`our app is running, can be accessed now on http://localhost:${port}/company/`));
+    ()=> console.log(`our app is running, can be accessed now on http://localhost:${port}/lostAndFound`));
