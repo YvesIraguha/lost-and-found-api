@@ -1,0 +1,33 @@
+{
+  "name": "lostandfound.api",
+  "version": "1.0.0",
+  "description": "application to register what you have lost and what you found to help each other",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.9.5"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/runtime": "^7.8.7"
+  },
+  "scripts": {
+    "build": ".\\node_modules\\.bin\\babel src --out-dir dist",
+    "start": "node dist/index.js",
+    "dev": "nodemon dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YvesIraguha/LostAndFound.API.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YvesIraguha/LostAndFound.API/issues"
+  },
+  "homepage": "https://github.com/YvesIraguha/LostAndFound.API#readme"
+}
