@@ -6,8 +6,7 @@ const foundSchema = mongoose.Schema({
         required: true
     },
     documentNumber: {
-        type: Number,
-
+        type: String
     },
     owner:{
         fullName: {
@@ -16,18 +15,15 @@ const foundSchema = mongoose.Schema({
         },
         phoneNumber: {
             type: String,
-            required: true
         },
         email: {type: String}
     },
     whoFound: {
         fullName: {
             type: String,
-            required: true
         },
         phoneNumber: {
             type: String,
-            required: true
         },
         email: {type: String}
     },

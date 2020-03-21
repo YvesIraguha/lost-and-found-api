@@ -22,7 +22,9 @@ class Controller {
             status: {
                 isFound: true,
             },
-            location: req.body.location,
+            location: {
+                pickingPlace: req.body.location
+            },
             requireReward: req.body.reward
         });
 
@@ -38,7 +40,7 @@ class Controller {
         //updating the lost document to be found or saving a new found document
         if (theLost) {
             const update = await LostDocuments.updateOne({_id: theLost._id}, 
-                {$set: {'status.isFound':true}});
+                {$set: {'status.isFound':true, 'location.pickingPlace':req.body.location}});
             res.json({ 
                 msg:"This document has advertised to be lost",
                 owner: {
@@ -76,7 +78,9 @@ class Controller {
             status: {
                 isLost: true,
             },
-            location: req.body.location,
+            location: {
+                lostPlace: req.body.location
+            },
             requireReward: req.body.reward
         });
 
@@ -93,7 +97,7 @@ class Controller {
         if (theFound) {
             try {
                 const update = await LostDocuments.updateOne({_id: theFound._id}, 
-                    {$set: {'status.isLost':true}});
+                    {$set: {'status.isLost':true, 'location.lostPlace':req.body.location}});
     
                 res.json({
                     msg: `Your ${theFound.documentType} has found by:`,
@@ -117,6 +121,21 @@ class Controller {
             }
         };
     };
+
+    static async lostAndfoundDoc (req, res) {
+        const lost_found = await LostDocuments.find({
+            $and: [
+                {'status.isLost':true},
+                {'status.isFound':true}
+            ]
+        })
+        .select({_id:0, __v:0, status:0});
+        try {
+            res.json(lost_found)
+        } catch (error) {
+            res.json(error.message)
+        }
+    }   
 };
 
 export default Controller;
