@@ -17,7 +17,8 @@ const foundSchema = mongoose.Schema({
         phoneNumber: {
             type: String,
             required: true
-        }
+        },
+        email: {type: String}
     },
     whoFound: {
         fullName: {
@@ -27,11 +28,25 @@ const foundSchema = mongoose.Schema({
         phoneNumber: {
             type: String,
             required: true
-        }
+        },
+        email: {type: String}
     },
     location: {
-        type: String,
-        required: true
+        lostPlace: {
+            type: String
+        },
+        pickingPlace: {type: String}
+    },
+    status: {
+        isLost: {
+            type: Boolean
+        },
+        isFound: {
+            type: Boolean
+        },
+        isDelivered:{
+            type: Boolean
+        }
     },
     requireReward: {
         type: Boolean,
@@ -41,4 +56,4 @@ const foundSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Found', foundSchema);
+module.exports = mongoose.model('LostDocuments', foundSchema);
