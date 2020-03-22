@@ -1,6 +1,4 @@
-import LostDocuments from '../../models/found';
-import Lost from '../../models/lost';
-import Delivered from '../../models/delivered';
+import LostDocuments from '../../models/lostAndFound';
 
 
 class Controller {
