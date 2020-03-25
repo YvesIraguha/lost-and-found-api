@@ -1,7 +1,6 @@
 import  express from 'express';
-import mongoose from 'mongoose';
 import router from './routes/route';
-import { json } from 'express';
+import {db_connections} from './db/connection';
 
 
 require('dotenv').config();
@@ -15,12 +14,7 @@ app.use('/lostAndFound', router);
 const port = process.env.PORT || 3000;
 
 //connecting to mongodb data base;
-mongoose.connect(process.env.DB_CONNECT,
-    { useNewUrlParser: true,
-        useFindAndModify: false,
-        useCreateIndex:true,
-        useUnifiedTopology: true  },
-    () => console.log('connected to database'));
+db_connections();
 
 app.listen(port, 
     ()=> console.log(`our app is running, can be accessed now on http://localhost:${port}/lostAndFound`));
