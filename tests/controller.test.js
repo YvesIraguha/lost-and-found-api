@@ -1,7 +1,13 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
+<<<<<<< HEAD
 import server from '../src/app';
 import { url } from '../src/models/lost';
+=======
+import mongoose from 'mongoose';
+import server from '../src/app';
+import { url } from '../src/db/connection';
+>>>>>>>  This is a combination of 2 commits.
 
 describe('/lost', () => {
   beforeAll((done) => {
