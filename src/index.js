@@ -1,5 +1,4 @@
 import  express from 'express';
-import router from './routes/route';
 import {db_connections} from './db/connection';
 
 
@@ -9,7 +8,6 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-app.use('/lostAndFound', router);
 
 const port = process.env.PORT || 3000;
 

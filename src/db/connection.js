@@ -16,5 +16,10 @@ export const db_connections =()=>{
             useFindAndModify: false,
             useCreateIndex:true,
             useUnifiedTopology: true  },
-        () => console.log('connected to database'));
+        (err) => {
+            if(err){
+                console.log('failed to connect to database');
+            }
+            console.log('connected to database')
+        });
 }
