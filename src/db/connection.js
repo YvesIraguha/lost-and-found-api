@@ -1,15 +1,14 @@
 import mongoose from 'mongoose';
+import config from '../../config/config';
 import dotenv from 'dotenv';
 dotenv.config();
 
 export const db_connections =()=>{
-    const db_user = process.env.USER;
-    const db_password = process.env.PWD;
-    const db_host = process.env.HOST_NAME;
-    const db_port = process.env.PORT_NAME;
-    const db_name = process.env.DB_NAME;
 
-    const url = `mongodb://${db_user}:${db_password}@${db_host}:${db_port}/${db_name}?authSource=admin`;
+    //Laoding variables from config files
+    const {db: {username, password, host, port, name}} = config;
+
+    const url = `mongodb://${username}:${password}@${host}:${port}/${name}?authSource=admin`;
 
     mongoose.connect(url,
         { useNewUrlParser: true,
@@ -18,8 +17,9 @@ export const db_connections =()=>{
             useUnifiedTopology: true  },
         (err) => {
             if(err){
-                console.log('failed to connect to database');
+                console.log(err);
+            }else{
+                console.log(`Connected to ${name} database`);
             }
-            console.log('connected to database')
         });
 }
