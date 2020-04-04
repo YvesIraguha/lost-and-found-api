@@ -3,7 +3,7 @@ import config from '../../config/config';
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const db_connections =()=>{
+export const dbConnection =()=>{
 
     //Laoding variables from config files
     const {db: {username, password, host, port, name}} = config;

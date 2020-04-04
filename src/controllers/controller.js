@@ -9,10 +9,10 @@ router.post('/lost', async (req, res)=>{
         number: req.body.number
     });
     try {
-         const lostDoc = await lost.save((err, data)=>{
-             if (err) console.log(err);
-         });
-         res.json(lostDoc);
+        const lostDoc = await lost.save((err, data)=>{
+            if(err) console.log(err);
+        });
+        res.json({msg: `Successfully added ${req.body.name}`});
     } catch (error) {
         console.log(error);
     }

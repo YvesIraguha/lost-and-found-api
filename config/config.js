@@ -1,5 +1,5 @@
 require('dotenv').config();
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || "development";
 
 const development = {
     app: {
@@ -7,10 +7,10 @@ const development = {
     },
     db: {
         username: process.env.USER,
-        password: process.env.DB_PWD,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        name: 'lost_and_found'
+        password: process.env.PASS,
+        host: process.env.HOST,
+        port: process.env.PORT,
+        name: process.env.DB_NAME,
     }
 };
 const testing = {
@@ -19,10 +19,10 @@ const testing = {
     },
     db: {
         username: process.env.USER,
-        password: process.env.DB_PWD,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        name: 'lost_and_found_test'
+        password: process.env.PASS,
+        host: process.env.HOST,
+        port: process.env.PORT,
+        name: process.env.TEST_DB,
     }
 };
 const production = {
