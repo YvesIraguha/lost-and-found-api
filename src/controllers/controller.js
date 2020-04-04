@@ -10,21 +10,21 @@ router.post('/lost', async (req, res)=>{
     });
     try {
         const lostDoc = await lost.save((err, data)=>{
-            if(err) console.log(err);
+            if(err) res.status(501).json({msg: 'failed to save '})
         });
         res.json({msg: `Successfully added ${req.body.name}`});
     } catch (error) {
-        console.log(error);
+        res.status(500).json({msg: 'internal error, try again'})
     }
 });
 router.get('/', async(req, res)=>{
     try {
         const findDoc = await Lost.find((err, data)=>{
-            if (err) console.log(err);
+            if (err) res.status(501).json({msg: 'failed to fetch the data'});
         });
         res.json(findDoc);
     } catch (error) {
-        console.log(error);
+        res.status(500).json({msg: 'internal error, try again'});
     }
 })
 
