@@ -1,7 +1,9 @@
 import morgan from 'morgan';
 import  express from 'express';
+
 import {db_connections} from './db/connection';
 import config from '../config/config';
+import router from './controllers/controller';
 
 
 require('dotenv').config();
@@ -16,6 +18,7 @@ if(!process.env.NODE_ENV){
 //middlewares
 app.use(express.json());
 app.use(morgan('dev'));
+app.use('/lostAndFound', router)
 
 const port = config.app.port;
 
