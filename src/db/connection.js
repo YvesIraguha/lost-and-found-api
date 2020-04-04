@@ -8,7 +8,7 @@ export const db_connections =()=>{
     //Laoding variables from config files
     const {db: {username, password, host, port, name}} = config;
 
-    const url = `mongodb://${username}:${password}@${host}:${port}/${name}?authSource=admin`;
+    const url = `mongodb://${username}:${password}@${host}:${port}/${name}?authSource=admin` || config.db.database_url;
 
     mongoose.connect(url,
         { useNewUrlParser: true,
@@ -17,7 +17,7 @@ export const db_connections =()=>{
             useUnifiedTopology: true  },
         (err) => {
             if(err){
-                console.log(err);
+                console.log('Failed to connect to MongoDB');
             }else{
                 console.log(`Connected to ${name} database`);
             }
