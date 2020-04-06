@@ -25,18 +25,27 @@ const testing = {
         name: process.env.TEST_DB,
     }
 };
+const staging = {
+    app: {
+        port: process.env.PORT
+    },
+    db: {
+        database_url: process.env.DATABASE_URL
+    }   
+};
 const production = {
     app: {
         port: process.env.PORT
     },
     db: {
-        database_url: process.env.PROD_DB
+        database_url: process.env.DATABASE_URL
     }
 };
 
 const config = {
     development,
     testing,
+    staging,
     production
 };
 
