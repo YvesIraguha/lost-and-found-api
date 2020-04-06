@@ -8,7 +8,7 @@ export const dbConnection =()=>{
     //Laoding variables from config files
     const {db: {username, password, host, port, name}} = config;
 
-    const url = `mongodb://${username}:${password}@${host}:${port}/${name}?authSource=admin` || config.db.database_url;
+    const url = `mongodb://${host}:${port}/${name}?authSource=admin` || config.db.database_url;
 
     mongoose.connect(url,
         { useNewUrlParser: true,
