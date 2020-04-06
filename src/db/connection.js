@@ -6,7 +6,7 @@ dotenv.config();
 export const dbConnection =()=>{
 
     //Laoding variables from config files
-    const {db: {username, password, host, port, name}} = config;
+    const {db: {host, port, name}} = config;
 
     const url = `mongodb://${host}:${port}/${name}?authSource=admin` || config.db.database_url;
 
