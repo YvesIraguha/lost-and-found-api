@@ -17,9 +17,7 @@ export const dbConnection =()=>{
             useUnifiedTopology: true  },
         (err) => {
             if(err){
-                console.log('Failed to connect to MongoDB');
-            }else{
-                console.log(`Connected to ${name} database`);
-            }
+                process.exit(1);
+            };
         });
 }
