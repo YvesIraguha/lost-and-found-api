@@ -1,8 +1,8 @@
+import morgan from 'morgan';
 import  express from 'express';
-import mongoose from 'mongoose';
-import router from './routes/route';
-import { json } from 'express';
 
+import {dbConnection} from './db/connection';
+import config from '../config/config';
 
 require('dotenv').config();
 
@@ -10,17 +10,13 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-app.use('/lostAndFound', router);
+app.use(morgan('dev'));
 
-const port = process.env.PORT || 3000;
+const port = config.app.port;
+
 
 //connecting to mongodb data base;
-mongoose.connect(process.env.DB_CONNECT,
-    { useNewUrlParser: true,
-        useFindAndModify: false,
-        useCreateIndex:true,
-        useUnifiedTopology: true  },
-    () => console.log('connected to database'));
+dbConnection();
 
 app.listen(port, 
-    ()=> console.log(`our app is running, can be accessed now on http://localhost:${port}/lostAndFound`));
+    ()=> console.log(`Our app is running on ${port} ....🚀....`));
