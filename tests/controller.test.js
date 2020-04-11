@@ -1,55 +1,51 @@
 import request from 'supertest';
-import Lost from '../models/model';
+import server from '../src/app';
+import mongoose from 'mongoose';
+import { url } from '../src/db/connection';
 
-let server;
-
-describe('/lostAndFound', () => {
-  beforeEach(async () => {
-    server = require('../src/index');
-    await Lost.insertMany([
-      {
-        name: 'firstname',
-        number: '0789121324'
-      },
-      {
-        name: 'secondname',
-        number: '12344'
+describe('/lost', () => {
+  beforeAll((done) => {
+    mongoose.connect(
+      url,
+      { useNewUrlParser: true, useUnifiedTopology: true },
+      () => {
+        mongoose.connection.db.dropDatabase(() => {
+          done();
+        });
       }
-    ]);
+    );
   });
-
-  afterEach(async () => {
-    server.close();
-    await Lost.deleteMany({});
-  });
-
   describe('GET', () => {
-    it('should get all documents', async () => {
-      const res = await request(server).get('/lostAndFound/lost');
+    it('should get all documents', async (done) => {
+      const res = await request(server).get('/api/v1/lost');
       expect(res.status).toBe(200);
-      expect(res.body.length).toBe(2);
+      expect(res.body.items.length).toBe(0);
+      done();
     });
   });
 
   describe('POST', () => {
-    it('should return a status of 400 if document exist', async () => {
+    it('should post a document on the db', async (done) => {
       const doc = {
         name: 'firstname',
-        number: '0789121324'
+        description: '0789121324'
       };
-      const res = await request(server).post('/lostAndFound/lost').send(doc);
-
-      expect(res.status).toBe(400);
+      const res = await request(server).post('/api/v1/lost').send(doc);
+      expect(res.status).toBe(201);
+      expect(res.body.item.name).toBe(doc.name);
+      expect(res.body.item.description).toBe(doc.description);
+      done();
     });
-    it('should post a document on the db', async () => {
+    it('should post another document on the db', async (done) => {
       const doc = {
         name: 'ThisName',
-        number: '123345'
+        description: '123345'
       };
-
-      const res = await request(server).post('/lostAndFound/lost').send(doc);
-
-      expect(res.status).toBe(200);
+      const res = await request(server).post('/api/v1/lost').send(doc);
+      expect(res.status).toBe(201);
+      expect(res.body.item.name).toBe(doc.name);
+      expect(res.body.item.number).toBe(doc.number);
+      done();
     });
   });
 });
