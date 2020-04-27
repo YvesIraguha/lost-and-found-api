@@ -1,6 +1,5 @@
 import morgan from 'morgan';
 import express from 'express';
-import dbConnection from './db/connection';
 import routes from './routes';
 
 const app = express();

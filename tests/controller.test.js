@@ -1,7 +1,7 @@
+import mongoose from 'mongoose';
 import request from 'supertest';
 import server from '../src/app';
-import mongoose from 'mongoose';
-import { url } from '../src/db/connection';
+import { url } from '../src/models/lost';
 
 describe('/lost', () => {
   beforeAll((done) => {
