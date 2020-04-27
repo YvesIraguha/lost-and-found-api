@@ -27,15 +27,12 @@
     "verbose": true,
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/tests/",
-      "/config/"
+      "/node_modules/"
     ]
   },
   "scripts": {
-    "test": "export NODE_ENV=testing && jest --coverage --forceExit",
-    "build": "rm -rf dist/ && .\\node_modules\\.bin\\babel src --out-dir dist",
-    "prestart": "npm run build",
+    "test": "export NODE_ENV=testing && jest --forceExit",
+    "build": ".\\node_modules\\.bin\\babel src --out-dir dist",
     "start": "node dist/index.js",
     "dev": "nodemon --exec babel-node src/index.js"
   },
