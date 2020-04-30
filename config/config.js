@@ -4,7 +4,11 @@ const env = process.env.NODE_ENV || 'development';
 
 const development = {
   app: {
-    port: 3000
+    port: 3000,
+    secretKey: process.env.SECRET_KEY,
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL
   },
   db: {
     username: process.env.DB_USER_DEV,
@@ -16,7 +20,11 @@ const development = {
 };
 const testing = {
   app: {
-    port: 3000
+    port: 3000,
+    secretKey: process.env.SECRET_KEY,
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: process.env.CALLBACK_URL
   },
   db: {
     username: process.env.DB_USER_TEST,
@@ -28,7 +36,10 @@ const testing = {
 };
 const staging = {
   app: {
-    port: process.env.PORT
+    port: process.env.PORT,
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackUrl: process.env.CALLBACK_URL
   },
   db: {
     database_url: process.env.DATABASE_URL
@@ -36,7 +47,10 @@ const staging = {
 };
 const production = {
   app: {
-    port: process.env.PORT
+    port: process.env.PORT,
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackUrl: process.env.CALLBACK_URL
   },
   db: {
     database_url: process.env.DATABASE_URL

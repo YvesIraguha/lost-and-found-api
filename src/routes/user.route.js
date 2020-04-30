@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
-import googlePassport from '../controllers/user';
+import googlePassport from '../controllers/users/user';
+import config from '../../config/config';
 
 const userRouter = new Router();
 
@@ -16,13 +17,13 @@ userRouter.get(
   googlePassport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     try {
-      const secretKey = process.env.SECRET_KEY;
+      const { secretKey } = config.app;
       const token = jwt.sign({ _id: req.user._id }, secretKey, {
         algorithm: 'HS256'
       });
-      res.header('authentication', token).json({ token, user: req.user });
+      res.status(200).json({ token, user: req.user });
     } catch (error) {
-      res.json({ msg: 'Internal error,' });
+      res.status(500).json({ msg: 'Internal error,' });
     }
   }
 );
