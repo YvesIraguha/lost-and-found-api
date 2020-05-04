@@ -2,11 +2,13 @@ import morgan from 'morgan';
 import express from 'express';
 import routes from './routes/lostItem.route';
 import userRoutes from './routes/user.route';
+import passport from 'passport';
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
+app.use(passport.initialize());
 
 /**
  * Routes configurations
