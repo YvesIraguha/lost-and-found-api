@@ -1,4 +1,4 @@
-import LostItems from '../models/lost';
+import LostItems from '../../models/lost';
 
 export default {
   recordLostItem: async (req, res) => {
