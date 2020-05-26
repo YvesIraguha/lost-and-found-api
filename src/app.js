@@ -12,7 +12,7 @@ app.use(morgan('dev'));
 /**
  * Routes configurations
  */
-app.use('/api/v1/lost', routes);
+app.use('/api/v1/item', routes);
 app.use('/api/v1/users', emailAuthRoutes);
 app.use('/api/v1/users/auth', socialAuthRoutes);
 

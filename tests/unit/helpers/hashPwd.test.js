@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import hashPassword from '../../src/helpers/hashPwd';
+import hashPassword from '../../../src/helpers/hashPwd';
 
 describe('Hashing the password', () => {
   it('Should hash a given password', async (done) => {

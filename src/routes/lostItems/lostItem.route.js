@@ -1,10 +1,10 @@
 import express from 'express';
-import lostItemsController from '../../controllers/lostItems/lostItemsController';
+import authentication from '../../middlewares/authentication';
+import lostItemsController from '../../controllers/lostItems/lostItem';
 
 const lostRouter = express.Router();
 
 lostRouter
-  .post('/', lostItemsController.recordLostItem)
-  .get('/', lostItemsController.getAllLostItems);
+  .post('/lost', authentication, lostItemsController);
 
 export default lostRouter;

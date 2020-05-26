@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import { mockResponse, mockRequest } from './util/interceptor';
-import controller from '../../src/controllers/authentication';
+import { mockResponse, mockRequest } from '../util/interceptor';
+import controller from '../../../src/controllers/authentication';
 
 describe('Google Auth', () => {
   const req = mockRequest();

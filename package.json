@@ -37,7 +37,7 @@
     ]
   },
   "scripts": {
-    "test": "export NODE_ENV=testing && jest --coverage --forceExit",
+    "test": "jest --coverage --forceExit",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": ".\\node_modules\\.bin\\babel src --out-dir dist",
     "start": "node dist/index.js",
