@@ -23,9 +23,29 @@ const signupController = async (req, res) => {
   try {
     const newUser = await user.save();
     const token = await createToken(newUser);
-    return res.status(201).send({ token, newUser });
+    const {
+      firstName,
+      secondName,
+      username,
+      email,
+      phoneNumber,
+      date: createdAt,
+      _id
+    } = newUser;
+    return res.status(201).send({
+      token,
+      body: {
+        firstName,
+        secondName,
+        username,
+        email,
+        phoneNumber,
+        createdAt,
+        _id
+      }
+    });
   } catch (err) {
-    return res.status(400).send(err.message);
+    return res.status(400).send({ err: err.message });
   }
 };
 

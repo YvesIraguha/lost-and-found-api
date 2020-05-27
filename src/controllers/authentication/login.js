@@ -11,7 +11,7 @@ const loginController = async (req, res) => {
     if (!validPass) return res.status(400).send({ msg: 'Invalid password' });
 
     const token = await createToken(user);
-    return res.status(200).send({ token, user });
+    return res.status(200).send({ msg: 'Logged in successfully', token });
   } catch (error) {
     return res.status(400).send({ error: error.message });
   }

@@ -48,9 +48,9 @@ describe('Signup', () => {
       const res = await request(server).post(endPoint).send(user);
       expect(res.status).toBe(201);
       expect(res.body).toHaveProperty('token');
-      expect(res.body).toHaveProperty('newUser');
-      expect(res.body.newUser).toHaveProperty('_id');
-      expect(res.body.newUser.email).toBe(user.email);
+      expect(res.body).toHaveProperty('body');
+      expect(res.body.body).toHaveProperty('_id');
+      expect(res.body.body.email).toBe(user.email);
       done();
     });
   });

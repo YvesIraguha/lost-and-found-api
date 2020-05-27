@@ -38,10 +38,10 @@ describe('Login', () => {
       const res = await request(server).post(endPoint).send(user);
       expect(res.status).toBe(400);
       expect(res.body).toHaveProperty('msg');
-      expect(res.body.msg).toMatch(/invalid/);
+      expect(res.body.msg).toMatch(/invalid/i);
       done();
     });
-    it('Should warn a user if password didn\'t match', async (done) => {
+    it("Should warn a user if password didn't match", async (done) => {
       const user = {
         username: 'username',
         email: 'anyemail@email.com',
@@ -63,9 +63,7 @@ describe('Login', () => {
       const res = await request(server).post(endPoint).send(account);
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty('token');
-      expect(res.body).toHaveProperty('user');
-      expect(res.body.user).toHaveProperty('_id');
-      expect(res.body.user.email).toBe(account.email);
+      expect(res.body).toHaveProperty('msg');
       done();
     });
   });
