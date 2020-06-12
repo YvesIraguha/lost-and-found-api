@@ -6,12 +6,16 @@ const User = mongoose.Schema({
     enum: ['google', 'twitter', 'facebook', 'linkedin', 'email']
   },
   profileId: String,
-  displayName: String,
-  givenName: String,
-  familyName: String,
+  username: String,
+  firsName: String,
+  secondName: String,
   photoUrl: String,
   email: String,
-  lastLogin: {
+  password: {
+    type: String,
+    required() { return this.platform === 'email'; }
+  },
+  date: {
     timestamp: { type: Date, default: undefined }
   }
 });
