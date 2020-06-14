@@ -9,8 +9,12 @@ router.post('/', async(req, res) => {
 
     const foundItem = new FoundItem({
         name:req.body.name,
+        district:req.body.district,
+        sector:req.body.sector,
         description:req.body.description,
-        category:req.body.category
+        category:req.body.category,
+        isRewarded:req.body.isRewarded,
+        price:req.body.price
     });
         const found = await foundItem.save();
         res.send(found);

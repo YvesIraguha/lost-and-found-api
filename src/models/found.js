@@ -1,10 +1,19 @@
 const mongoose = require('mongoose');
 const Joi = require('@hapi/joi');
+const string = require('@hapi/joi/lib/types/string');
 
 
 
 const foundSchema = new mongoose.Schema({
-    name:{
+    docName:{
+        type:String,
+        required:true,
+    },
+    district:{
+        type:String,
+        required:true,
+    },
+    sector:{
         type:String,
         required:true,
     },
@@ -14,7 +23,12 @@ const foundSchema = new mongoose.Schema({
     },
     category:{
         type:String,
-        required:true
+        required:true,
+    },
+    isRewarded: Boolean,
+    price:{
+        type:Number,
+        required:function(){ return this.isRewarded}
     }
    
 });
@@ -23,8 +37,12 @@ const FoundItem = mongoose.model('FoundItem', foundSchema);
 function validateItem(item){
     const Schema= Joi.object().keys({
         name: Joi.string().min(5).max(50).required(),
+        district: Joi.string().min(4).max(50).required(),
+        sector: Joi.string().min(3).max(50).required(),
         description:Joi.string().min(5).max(250).required(),
         category:Joi.string().min(5).max(50).required(),
+        isRewarded:Joi.boolean(),
+        price:Joi.string().required()
 
     })
     return item
