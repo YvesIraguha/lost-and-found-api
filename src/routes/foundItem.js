@@ -8,7 +8,7 @@ router.post('/', async(req, res) => {
     if(error) return res.status(400).send(error.details[0].message);
 
     const foundItem = new FoundItem({
-        name:req.body.name,
+        docName:req.body.name,
         district:req.body.district,
         sector:req.body.sector,
         description:req.body.description,
@@ -21,4 +21,4 @@ router.post('/', async(req, res) => {
     
 });
 
-module.exports = router
+module.exports = router;
