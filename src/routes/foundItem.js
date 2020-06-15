@@ -8,7 +8,7 @@ router.post('/', async(req, res) => {
     if(error) return res.status(400).send(error.details[0].message);
 
     const foundItem = new FoundItem({
-        docName:req.body.name,
+        docName:req.body.docName,
         district:req.body.district,
         sector:req.body.sector,
         description:req.body.description,
