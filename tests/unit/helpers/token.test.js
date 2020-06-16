@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
-import createToken from '../../src/helpers/token';
+import createToken from '../../../src/helpers/token';
 
 describe('Generate the jwt token', () => {
   it('Should return a jwt token', async (done) => {

@@ -18,7 +18,7 @@ const development = {
     name: process.env.DB_NAME_DEV
   }
 };
-const testing = {
+const test = {
   app: {
     port: 3000,
     secretKey: process.env.SECRET_KEY,
@@ -59,7 +59,7 @@ const production = {
 
 const config = {
   development,
-  testing,
+  test,
   staging,
   production
 };

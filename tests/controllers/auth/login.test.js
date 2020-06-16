@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import request from 'supertest';
-import server from '../../src/app';
-import { url } from '../../src/models';
+import server from '../../../src/app';
+import { url } from '../../../src/models';
 
 describe('Login', () => {
   const endPoint = '/api/v1/users/login';
