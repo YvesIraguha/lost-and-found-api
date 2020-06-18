@@ -14,7 +14,7 @@ const LostSchema = new Schema({
     isFound: Boolean,
     isLost: Boolean
   },
-  lostPlace: {
+  place: {
     sector: String,
     district: String
   },
@@ -32,6 +32,6 @@ const LostSchema = new Schema({
   }
 });
 
-const LostItems = mongoose.model('LostItems', LostSchema);
+const document = mongoose.model('LostItems', LostSchema);
 
-export default LostItems;
+export default document;
