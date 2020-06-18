@@ -23,7 +23,7 @@ export default async (req, res) => {
     status:{
       isFound:true
     },
-    place:{
+    foundPlace:{
       district: req.body.district,
       sector: req.body.sector
     },

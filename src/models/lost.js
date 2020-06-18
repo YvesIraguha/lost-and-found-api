@@ -14,7 +14,11 @@ const LostSchema = new Schema({
     isFound: Boolean,
     isLost: Boolean
   },
-  place: {
+  lostPlace: {
+    sector: String,
+    district: String
+  },
+  foundPlace: {
     sector: String,
     district: String
   },
