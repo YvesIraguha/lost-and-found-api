@@ -36,7 +36,7 @@ const recordLostItem = async (req, res) => {
       },
       documentName,
       documentNumber,
-      lostPlace: {
+      place: {
         sector,
         district
       },
