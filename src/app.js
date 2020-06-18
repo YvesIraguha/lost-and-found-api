@@ -3,7 +3,6 @@ import express from 'express';
 import routes from './routes/lostItems/lostItem.route';
 import socialAuthRoutes from './routes/socialAuth/googleAuth';
 import emailAuthRoutes from './routes/authentication/auth';
-import router from './routes/foundItem';
 
 const app = express();
 app.use(express.json());
@@ -13,10 +12,9 @@ app.use(morgan('dev'));
 /**
  * Routes configurations
  */
-app.use('/api/v1/item', routes);
+app.use('/api/v1/items', routes);
 app.use('/api/v1/users', emailAuthRoutes);
 app.use('/api/v1/users/auth', socialAuthRoutes);
-app.use('/api/v1/foundItem', router);
 
 app.use('*', (req, res) =>
   // eslint-disable-next-line implicit-arrow-linebreak
