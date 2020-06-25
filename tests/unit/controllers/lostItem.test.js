@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { mockResponse, mockRequest } from '../util/interceptor';
-import lostItem from '../../../src/controllers/lostItems/lostItem';
+import lostItem from '../../../src/controllers/lostDoc/lostItem';
 import models from '../../../src/models';
 
 describe('register a lost item', () => {

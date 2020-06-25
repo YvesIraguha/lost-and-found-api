@@ -10,6 +10,10 @@ const LostSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  foundsBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   status: {
     isFound: Boolean,
     isLost: Boolean
@@ -28,7 +32,9 @@ const LostSchema = new Schema({
   },
   price: {
     type: Number,
-    required() { return this.isRewarded; }
+    required() {
+      return this.isRewarded;
+    }
   },
   date: {
     type: Date,

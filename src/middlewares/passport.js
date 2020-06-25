@@ -23,7 +23,7 @@ passport.use(
         platform: 'google',
         profileId: profile.id,
         email: profile.emails ? profile.emails[0].value : undefined,
-        useraname: profile.displayName,
+        username: profile.displayName,
         firstName: profile.name.givenName,
         secondName: profile.name.familyName,
         photoUrl: profile.photos ? profile.photos[0].value : undefined,
@@ -35,7 +35,7 @@ passport.use(
       const options = { upsert: true, new: true };
       User.findOneAndUpdate(query, update, options, (err, user) => {
         if (err) return done(err);
-        done(null, user);
+        return done(null, user);
       });
     }
   )

@@ -1,12 +1,12 @@
 import express from 'express';
 import authentication from '../../middlewares/authentication';
 import lostItemsController from '../../controllers/lostDoc';
-import {foundValidation} from '../../middlewares/validation';
+import docValidation from '../../middlewares/docValidation';
 
 const lostRouter = express.Router();
 
 lostRouter
-  .post('/lost', authentication, lostItemsController.lostItem)
-  .post('/found', [authentication, foundValidation], lostItemsController.foundItem);
+  .post('/lost', authentication, docValidation, lostItemsController.lostItem)
+  .post('/found', authentication, docValidation, lostItemsController.foundItem);
 
 export default lostRouter;
