@@ -26,7 +26,7 @@ export default async (req, res) => {
       documentName,
       documentNumber,
       'status.isFound': true
-    }).populate('user', 'username -_id');
+    }).populate('foundsBy', 'username -_id');
     if (foundDoc) {
       await LostItems.updateOne(
         { _id: foundDoc._id },
