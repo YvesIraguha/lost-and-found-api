@@ -1,6 +1,6 @@
 import LostItems from '../../models/lost';
 
-const recordLostItem = async (req, res) => {
+export default async (req, res) => {
   try {
     const {
       documentName,
@@ -26,8 +26,25 @@ const recordLostItem = async (req, res) => {
       documentName,
       documentNumber,
       'status.isFound': true
-    });
-    if (foundDoc) return res.status(200).send({ msg: 'Your document was Found' });
+    }).populate('foundsBy', 'username -_id');
+    if (foundDoc) {
+      await LostItems.updateOne(
+        { _id: foundDoc._id },
+        {
+          $set: {
+            'status.isLost': true,
+            lostPlace: {
+              district,
+              sector
+            },
+            user: req.user._id
+          }
+        }
+      );
+      return res
+        .status(200)
+        .send({ msg: `Your document was Found by ${foundDoc.foundsBy.username}` });
+    }
 
     const doc = new LostItems({
       user: req.user._id,
@@ -50,5 +67,3 @@ const recordLostItem = async (req, res) => {
     return res.status(400).send({ error: error.message });
   }
 };
-
-export default recordLostItem;

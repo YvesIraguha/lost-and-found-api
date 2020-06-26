@@ -7,7 +7,7 @@ const User = mongoose.Schema({
   },
   profileId: String,
   username: String,
-  firsName: String,
+  firstName: String,
   secondName: String,
   photoUrl: String,
   email: String,
