@@ -1,4 +1,5 @@
 import FoundItem from '../../models/lost';
+import emailNotification from '../../helpers/sendEmail';
 
 export default async (req, res) => {
   try {
@@ -41,6 +42,7 @@ export default async (req, res) => {
           }
         }
       );
+      emailNotification(lostDoc);
       return res
         .status(200)
         .send({ msg: `The document was lost by ${lostDoc.user.username}` });
