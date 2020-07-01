@@ -10,11 +10,19 @@ const LostSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  foundsBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   status: {
     isFound: Boolean,
     isLost: Boolean
   },
   lostPlace: {
+    sector: String,
+    district: String
+  },
+  foundPlace: {
     sector: String,
     district: String
   },
@@ -24,7 +32,9 @@ const LostSchema = new Schema({
   },
   price: {
     type: Number,
-    required() { return this.isRewarded; }
+    required() {
+      return this.isRewarded;
+    }
   },
   date: {
     type: Date,
@@ -32,6 +42,6 @@ const LostSchema = new Schema({
   }
 });
 
-const LostItems = mongoose.model('LostItems', LostSchema);
+const document = mongoose.model('LostItems', LostSchema);
 
-export default LostItems;
+export default document;
