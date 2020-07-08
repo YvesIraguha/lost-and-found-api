@@ -1,6 +1,6 @@
 import express from 'express';
 import authentication from '../../middlewares/authentication';
-import lostItemsController from '../../controllers/lostDocs';
+import lostItemsController from '../../controllers/lostDoc';
 import docValidation from '../../middlewares/docValidation';
 
 const lostRouter = express.Router();
