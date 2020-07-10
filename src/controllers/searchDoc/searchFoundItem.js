@@ -32,6 +32,6 @@ class SearchController{
             return res.status(400).send({error: err.message});
         } 
     }
-}
+};
 
 export default SearchController;
