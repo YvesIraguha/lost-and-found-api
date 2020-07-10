@@ -1,6 +1,5 @@
 import Document from '../../models/lost';
 
-
 class SearchController{
     static async searchFoundItem(req, res){
         try{
