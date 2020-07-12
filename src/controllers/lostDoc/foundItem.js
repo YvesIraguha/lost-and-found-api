@@ -1,8 +1,10 @@
+/* eslint-disable consistent-return */
 import sgMail from '@sendgrid/mail';
+import dotenv from 'dotenv';
 import emailNotification from '../../helpers/sendEmail';
 import FoundItem from '../../models/lost';
 
-
+dotenv.config();
 export default async (req, res) => {
   try {
     const {
@@ -20,9 +22,7 @@ export default async (req, res) => {
       'status.isFound': true
     });
     if (registerDoc) {
-      return res
-        .status(403)
-        .send({ msg: 'Document was already advertised' });
+      return res.status(403).send({ msg: 'Document was already advertised' });
     }
 
     const lostDoc = await FoundItem.findOne({
@@ -33,7 +33,11 @@ export default async (req, res) => {
     if (lostDoc) {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       const msg = emailNotification(
-        req.user.username, lostDoc.user.username, lostDoc.user.email, lostDoc.user.phoneNumber
+        req.user.email,
+        req.user.username,
+        lostDoc.user.email,
+        lostDoc.user.username,
+        lostDoc.user.phoneNumber ? lostDoc.user.phoneNumber : null
       );
       sgMail
         .send(msg)
@@ -53,7 +57,7 @@ export default async (req, res) => {
           );
           return res
             .status(200)
-            .send({ msg: `The document was lost by ${lostDoc.user.username}` });
+            .send({ msg: `The document was lost by "${lostDoc.user.username}"\n check your email for more details` });
         })
         .catch((error) => {
           res.status(500).send({ err: error.message });
