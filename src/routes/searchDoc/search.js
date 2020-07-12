@@ -6,8 +6,8 @@ import authentication from '../../middlewares/authentication';
 const searchRouter = new Router();
 
 searchRouter
-.post('/lost', authentication, SearchController.searchLostItem)
-.post('/found', authentication, SearchController.searchFoundItem);
+  .post('/lost', authentication, SearchController.searchLostItem)
+  .post('/found', authentication, SearchController.searchFoundItem);
 
 
 export default searchRouter;

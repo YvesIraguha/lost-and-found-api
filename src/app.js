@@ -19,7 +19,7 @@ app.use('/api/v1/items', routes);
 app.use('/api/v1/users', emailAuthRoutes);
 app.use('/api/v1/users/auth', socialAuthRoutes);
 app.use('/api/v1/users/profile', profileRouter);
-app.use('/api/v1/items/search', searchRouter)
+app.use('/api/v1/items/search', searchRouter);
 
 app.use('*', (req, res) =>
   // eslint-disable-next-line implicit-arrow-linebreak
