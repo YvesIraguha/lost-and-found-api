@@ -4,17 +4,18 @@ dotenv.config();
 
 
 export default (
-  user, email, name, phone
+  userEmail, userName, email, name, phone
 ) => {
   const msg = {
-    to: user,
-    from: process.env.SENDGRID_DOMAIN_NAME,
+    to: userEmail,
+    from: process.env.ADMIN_EMAIL,
     subject: 'Lost and Found Notification',
     text: 'Notification for your lost document',
-    html: `<em> Dear ${user},
-                      <br> Hope this email finds you well.<br>
-                      This is to let you know that your document was found by ${name} whose email is ${email} and phone is ${phone}.<br>
-                      Stay awesome!</em>`
+    html: `<em> Dear ${userName},
+                      <p> Hope this email finds you well.</p>
+                      This is to let you know that your document was found by ${name}<br>
+                       whose email is ${email}<br> and phone is ${phone}.<br>
+                      <b>Stay awesome!</b></em>`
   };
   return msg;
 };
