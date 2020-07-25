@@ -4,7 +4,7 @@ import routes from './routes/lostItems/lostItem.route';
 import socialAuthRoutes from './routes/socialAuth/googleAuth';
 import emailAuthRoutes from './routes/authentication/auth';
 import profileRouter from './routes/profile';
-import searchRouter from './routes/searchDoc/search';
+import deleteRouter from './routes/docs/deleteItem';
 
 const app = express();
 app.use(express.json());
@@ -19,7 +19,7 @@ app.use('/api/v1/items', routes);
 app.use('/api/v1/users', emailAuthRoutes);
 app.use('/api/v1/users/auth', socialAuthRoutes);
 app.use('/api/v1/users/profile', profileRouter);
-app.use('/api/v1/items/search', searchRouter);
+app.use('/api/v1/items/delete', deleteRouter);
 
 app.use('*', (req, res) =>
   // eslint-disable-next-line implicit-arrow-linebreak
