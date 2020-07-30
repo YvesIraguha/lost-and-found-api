@@ -8,8 +8,7 @@ const lostRouter = express.Router();
 lostRouter
   .post('/lost', authentication, docValidation, lostItemsController.lostItem)
   .post('/found', authentication, docValidation, lostItemsController.foundItem)
-  .delete('/:_id', authentication, lostItemsController.deleteItem)
-  .get('/lost/all', authentication, lostItemsController.allLost)
-  .get('/found/all', authentication, lostItemsController.allFound);
+  .get('/lost', authentication, lostItemsController.allLost)
+  .get('/found', authentication, lostItemsController.allFound);
 
 export default lostRouter;
