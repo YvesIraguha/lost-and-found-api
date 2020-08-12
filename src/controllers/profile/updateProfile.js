@@ -11,7 +11,17 @@ export default {
 
       return res
         .status(200)
-        .send({ msg: 'Profile Picture updated successfully', user });
+        .send({
+          msg: 'Profile Picture updated successfully',
+          user: {
+            firstName: user.firstName,
+            secondName: user.secondName,
+            username: user.username,
+            phoneNumber: user.phoneNumber,
+            email: user.email,
+            photoUrl: user.photoUrl
+          }
+        });
     } catch (error) {
       return res.status(500).send({ error: error.message });
     }
@@ -32,7 +42,15 @@ export default {
       const result = await user.save();
       return res
         .status(200)
-        .send({ msg: 'Info successfully updated', result });
+        .send({
+          msg: 'Info successfully updated',
+          result: {
+            firstName: result.firstName,
+            secondName: result.secondName,
+            username: result.username,
+            phoneNumber: result.phoneNumber
+          }
+        });
     } catch (error) {
       return res.status(500).send({ error: error.message });
     }
