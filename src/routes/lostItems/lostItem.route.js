@@ -10,6 +10,7 @@ lostRouter
   .post('/found', authentication, docValidation, lostItemsController.foundItem)
   .get('/lost', authentication, lostItemsController.allLost)
   .get('/found', authentication, lostItemsController.allFound)
-  .put('/edit/:_id', authentication, editValidation, lostItemsController.updateItem);
+  .put('/lost/:_id', authentication, editValidation, lostItemsController.updateItem)
+  .put('/found/:_id', authentication, editValidation, lostItemsController.updateItem);
 
 export default lostRouter;

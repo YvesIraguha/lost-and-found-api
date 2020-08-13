@@ -8,27 +8,30 @@ export default async (req, res) => {
             price
         } = req.body;
  try{
-    const edittedItem = await UpdateItem.findById(req.params._id);
+    const registeredItem = await UpdateItem.findById(req.params._id);
             
-    if(!edittedItem) { 
+    if(!registeredItem) { 
         return res
         .status(404)
         .json({error: 'Document not found!'})
     }
 
-    edittedItem
+    const edittedItem = registeredItem
         .set({
-            documentName: documentName || edittedItem.documentName,
-            documentNumber: documentNumber || edittedItem.documentNumber,
-            isRewarded: isRewarded || edittedItem.isRewarded,
-            price: price || edittedItem.price
+            documentName: documentName || registeredItem.documentName,
+            documentNumber: documentNumber || registeredItem.documentNumber,
+            isRewarded: isRewarded || registeredItem.isRewarded,
+            price: price || registeredItem.price
         })
-       
+    
+    if (isRewarded === 'false' && registeredItem.price){
+       registeredItem.set({price: ''})
+    }
     const result = await edittedItem.save();
        return  res.
         status(200)
         .send({
-            msg:`Document with number ${result.documentNumber} updated successfulyy`, 
+            msg:`Document with number ${result.documentNumber} updated successfuly`, 
             result
         })
     }catch(err){
