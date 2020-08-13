@@ -24,8 +24,8 @@ export default async (req, res) => {
             price: price || registeredItem.price
         })
     
-    if (isRewarded === 'false' && registeredItem.price){
-       registeredItem.set({price: ''})
+    if (isRewarded === 'false' && registeredItem.price) {
+       registeredItem.set({price: '0'})
     }
     const result = await edittedItem.save();
        return  res.
