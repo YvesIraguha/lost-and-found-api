@@ -11,7 +11,7 @@ export const signUpValidation = (req, res, next) => {
   });
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).json({ msg: error.details[0].message });
-  next();
+  return next();
 };
 
 export const loginValidation = (req, res, next) => {
@@ -22,5 +22,17 @@ export const loginValidation = (req, res, next) => {
   });
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).json({ msg: error.details[0].message });
-  next();
+  return next();
+};
+
+export const profileValidation = (req, res, next) => {
+  const schema = Joi.object({
+    firstName: Joi.string().min(4),
+    secondName: Joi.string().min(4),
+    phoneNumber: Joi.string().min(10),
+    username: Joi.string().min(4)
+  });
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).json({ msg: error.details[0].message });
+  return next();
 };
