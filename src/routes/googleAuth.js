@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import googlePassport from '../../middlewares/passport';
-import controller from '../../controllers/authentication';
+import googlePassport from '../middlewares/passport';
+import controller from '../controllers/authentication';
 
 const userRouter = new Router();
 
