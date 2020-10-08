@@ -1,8 +1,8 @@
 import morgan from 'morgan';
 import express from 'express';
-import routes from './routes/lostItems/lostItem.route';
-import socialAuthRoutes from './routes/socialAuth/googleAuth';
-import emailAuthRoutes from './routes/authentication/auth';
+import routes from './routes/items';
+import socialAuthRoutes from './routes/googleAuth';
+import emailAuthRoutes from './routes/auth';
 import profileRouter from './routes/profile';
 import searchRouter from './routes/searchDoc/search';
 
