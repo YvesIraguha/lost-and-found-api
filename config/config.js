@@ -9,7 +9,7 @@ const development = {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL,
-    sendgridKey:process.env.SENDGRID_API_KEY
+    sendgridKey: process.env.SENDGRID_API_KEY
   },
   db: {
     username: process.env.DB_USER_DEV,
@@ -26,7 +26,7 @@ const test = {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK_URL,
-    sendgridKey:process.env.SENDGRID_API_KEY
+    sendgridKey: process.env.SENDGRID_API_KEY
   },
   db: {
     username: process.env.DB_USER_TEST,
@@ -42,7 +42,7 @@ const staging = {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackUrl: process.env.CALLBACK_URL,
-    sendgridKey:process.env.SENDGRID_API_KEY
+    sendgridKey: process.env.SENDGRID_API_KEY
   },
   db: {
     database_url: process.env.DATABASE_URL
@@ -54,7 +54,7 @@ const production = {
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
     callbackUrl: process.env.CALLBACK_URL,
-    sendgridKey:process.env.SENDGRID_API_KEY
+    sendgridKey: process.env.SENDGRID_API_KEY
   },
   db: {
     database_url: process.env.DATABASE_URL
