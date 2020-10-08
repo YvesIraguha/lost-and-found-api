@@ -2,7 +2,7 @@ import request from 'supertest';
 import server from '../../src/app';
 
 describe('Authentication middleware', () => {
-  const endPoint = '/api/v1/item/lost';
+  const endPoint = '/api/v1/items/lost';
   it('Should Return 401 if no token provided', async (done) => {
     const doc = {
       documentName: 'docName',
@@ -17,9 +17,7 @@ describe('Authentication middleware', () => {
       }
     };
 
-    const res = await request(server)
-      .post(endPoint)
-      .send(doc);
+    const res = await request(server).post(endPoint).send(doc);
     expect(res.status).toBe(401);
     expect(res.body).toHaveProperty('msg', 'Access Denied');
     done();

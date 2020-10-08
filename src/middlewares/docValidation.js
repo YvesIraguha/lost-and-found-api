@@ -10,6 +10,7 @@ export const docValidation = (req, res, next) => {
     price: Joi.string()
   });
   const { error } = schema.validate(req.body);
+
   if (error) return res.status(400).json({ msg: error.details[0].message });
   return next();
 };
