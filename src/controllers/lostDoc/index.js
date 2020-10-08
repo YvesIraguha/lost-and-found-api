@@ -22,6 +22,7 @@ const itemController = {
         documentNumber,
         'status.isLost': true
       });
+
       if (adDoc) {
         return res
           .status(403)
@@ -48,7 +49,7 @@ const itemController = {
           }
         );
 
-        return res.status(200).send({
+        return res.status(201).send({
           msg: `Your document was Found by ${foundDoc.foundsBy.username}`
         });
       }
@@ -125,7 +126,7 @@ const itemController = {
                 }
               }
             );
-            return res.status(200).send({
+            return res.status(201).send({
               msg: `The document was lost by "${lostDoc.user.username}"\n check your email for more details`
             });
           })
@@ -166,7 +167,7 @@ const itemController = {
           .send({ error: 'No document with such Id found' });
       }
 
-      return res.status(200).send({
+      return res.status(201).send({
         msg: `Document with number ${deleteDoc.documentNumber} deleted successfully`,
         deleteDoc
       });
@@ -250,7 +251,7 @@ const itemController = {
       }
 
       const result = await editedItem.save();
-      return res.status(200).send({
+      return res.status(201).send({
         msg: `Document with number ${result.documentNumber} updated successfully`,
         result
       });
