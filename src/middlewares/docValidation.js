@@ -19,6 +19,8 @@ export const editValidation = (req, res, next) => {
   const schema = Joi.object().keys({
     documentName: Joi.string().min(5).max(50),
     documentNumber: Joi.string().min(5).max(50),
+    district: Joi.string().min(4).max(50),
+    sector: Joi.string().min(3).max(50),
     isRewarded: Joi.boolean(),
     price: Joi.string()
   });
