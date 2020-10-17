@@ -8,19 +8,11 @@ const { LostItems: Item } = models;
 const itemController = {
   recordLostItem: async (req, res) => {
     try {
-      const {
-        documentName,
-        documentNumber,
-        sector,
-        district,
-        isRewarded,
-        price
-      } = req.body;
-
+      const { documentTitle, documentID, sector, district, reward } = req.body;
       const adDoc = await Item.findOne({
-        documentName,
-        documentNumber,
-        'status.isLost': true
+        documentTitle,
+        documentID,
+        status: 'lost'
       });
 
       if (adDoc) {
@@ -30,16 +22,16 @@ const itemController = {
       }
 
       const foundDoc = await Item.findOne({
-        documentName,
-        documentNumber,
-        'status.isFound': true
+        documentTitle,
+        documentID,
+        status: 'found'
       }).populate('foundsBy', 'username -_id');
       if (foundDoc) {
         await Item.updateOne(
           { _id: foundDoc._id },
           {
             $set: {
-              'status.isLost': true,
+              status: 'lost',
               lostPlace: {
                 district,
                 sector
@@ -59,14 +51,13 @@ const itemController = {
         status: {
           isLost: true
         },
-        documentName,
-        documentNumber,
+        documentTitle,
+        documentID,
         lostPlace: {
           sector,
           district
         },
-        isRewarded,
-        price
+        reward
       });
 
       const newDoc = await doc.save();
@@ -78,28 +69,21 @@ const itemController = {
 
   recordFoundItem: async (req, res) => {
     try {
-      const {
-        documentName,
-        documentNumber,
-        sector,
-        district,
-        isRewarded,
-        price
-      } = req.body;
+      const { documentTitle, documentID, sector, district, reward } = req.body;
 
       const registerDoc = await Item.findOne({
-        documentName,
-        documentNumber,
-        'status.isFound': true
+        documentTitle,
+        documentID,
+        status: 'found'
       });
       if (registerDoc) {
         return res.status(403).send({ msg: 'Document was already advertised' });
       }
 
       const lostDoc = await Item.findOne({
-        documentName,
-        documentNumber,
-        'status.isLost': true
+        documentTitle,
+        documentID,
+        status: 'lost'
       }).populate('user', 'username email phoneNumber -_id');
       if (lostDoc) {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -117,7 +101,7 @@ const itemController = {
               { _id: lostDoc._id },
               {
                 $set: {
-                  'status.isFound': true,
+                  status: 'found',
                   foundPlace: {
                     district,
                     sector
@@ -143,10 +127,9 @@ const itemController = {
             district,
             sector
           },
-          documentName,
-          documentNumber,
-          isRewarded,
-          price
+          documentTitle,
+          documentID,
+          reward
         });
 
         const found = await foundItem.save();
@@ -168,7 +151,7 @@ const itemController = {
       }
 
       return res.status(201).send({
-        msg: `Document with number ${deleteDoc.documentNumber} deleted successfully`,
+        msg: `Document with number ${deleteDoc.documentID} deleted successfully`,
         deleteDoc
       });
     } catch (error) {
@@ -179,7 +162,7 @@ const itemController = {
   getAllLost: async (req, res) => {
     try {
       const allFoundItems = await Item.find({
-        'status.isFound': true
+        status: 'found'
       });
       if (!allFoundItems) {
         return res
@@ -196,7 +179,7 @@ const itemController = {
   getAllFound: async (req, res) => {
     try {
       const allLostItems = await Item.find({
-        'status.isLost': true
+        status: 'lost'
       });
       if (!allLostItems) {
         return res
@@ -226,7 +209,7 @@ const itemController = {
   },
 
   updateItem: async (req, res) => {
-    const { documentName, documentNumber, isRewarded, price } = req.body;
+    const { documentTitle, documentID, reward } = req.body;
 
     try {
       if (!mongoose.Types.ObjectId.isValid(req.params._id)) {
@@ -240,19 +223,14 @@ const itemController = {
       }
 
       const editedItem = registeredItem.set({
-        documentName: documentName || registeredItem.documentName,
-        documentNumber: documentNumber || registeredItem.documentNumber,
-        isRewarded: isRewarded || registeredItem.isRewarded,
-        price: price || registeredItem.price
+        documentTitle: documentTitle || registeredItem.documentTitle,
+        documentID: documentID || registeredItem.documentID,
+        reward: reward || registeredItem.reward
       });
-
-      if (isRewarded === 'false' && registeredItem.price) {
-        registeredItem.set({ price: '0' });
-      }
 
       const result = await editedItem.save();
       return res.status(201).send({
-        msg: `Document with number ${result.documentNumber} updated successfully`,
+        msg: `Document with number ${result.documentID} updated successfully`,
         result
       });
     } catch (err) {
