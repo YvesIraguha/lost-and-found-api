@@ -1,5 +1,4 @@
 import sgMail from '@sendgrid/mail';
-import mongoose from 'mongoose';
 import models from '../../models/index';
 import emailNotification from '../../helpers/sendEmail';
 
@@ -8,7 +7,7 @@ const { LostItems: Item } = models;
 const itemController = {
   recordLostItem: async (req, res) => {
     try {
-      const { documentTitle, documentID, sector, district, reward } = req.body;
+      const { documentTitle, documentID, location, reward, status } = req.body;
       const adDoc = await Item.findOne({
         documentTitle,
         documentID,
@@ -32,10 +31,7 @@ const itemController = {
           {
             $set: {
               status: 'lost',
-              lostPlace: {
-                district,
-                sector
-              },
+              location,
               user: req.user._id
             }
           }
@@ -48,15 +44,10 @@ const itemController = {
 
       const doc = new Item({
         user: req.user._id,
-        status: {
-          isLost: true
-        },
+        status,
         documentTitle,
         documentID,
-        lostPlace: {
-          sector,
-          district
-        },
+        location,
         reward
       });
 
@@ -69,7 +60,7 @@ const itemController = {
 
   recordFoundItem: async (req, res) => {
     try {
-      const { documentTitle, documentID, sector, district, reward } = req.body;
+      const { documentTitle, documentID, location, reward, status } = req.body;
 
       const registerDoc = await Item.findOne({
         documentTitle,
@@ -102,10 +93,7 @@ const itemController = {
               {
                 $set: {
                   status: 'found',
-                  foundPlace: {
-                    district,
-                    sector
-                  },
+                  location,
                   foundsBy: req.user._id
                 }
               }
@@ -120,13 +108,8 @@ const itemController = {
       } else {
         const foundItem = new Item({
           foundsBy: req.user._id,
-          status: {
-            isFound: true
-          },
-          foundPlace: {
-            district,
-            sector
-          },
+          status,
+          location,
           documentTitle,
           documentID,
           reward
@@ -212,15 +195,7 @@ const itemController = {
     const { documentTitle, documentID, reward } = req.body;
 
     try {
-      if (!mongoose.Types.ObjectId.isValid(req.params._id)) {
-        return res.status(404).json({ msg: 'Invalid ID' });
-      }
-
       const registeredItem = await Item.findById(req.params._id);
-
-      if (!registeredItem) {
-        return res.status(404).json({ error: 'Document not found!' });
-      }
 
       const editedItem = registeredItem.set({
         documentTitle: documentTitle || registeredItem.documentTitle,

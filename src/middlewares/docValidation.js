@@ -1,4 +1,8 @@
 import Joi from '@hapi/joi';
+import mongoose from 'mongoose';
+import models from '../models/index';
+
+const { LostItems: Item } = models;
 
 export const docValidation = (req, res, next) => {
   const schema = Joi.object().keys({
@@ -28,5 +32,18 @@ export const editValidation = (req, res, next) => {
   });
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).json({ msg: error.details[0].message });
+  return next();
+};
+
+export const validateId = async (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params._id)) {
+    return res.status(404).json({ msg: 'Invalid ID' });
+  }
+  const registeredItem = await Item.findById(req.params._id);
+
+  if (!registeredItem) {
+    return res.status(404).json({ error: 'Document not found!' });
+  }
+
   return next();
 };
