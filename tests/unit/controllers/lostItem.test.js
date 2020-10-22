@@ -10,16 +10,14 @@ describe('register a lost item', () => {
 
   it('Should return 403 if document was advertised', async (done) => {
     const doc = {
-      documentName: 'docName',
-      documentNumber: 'doc-number',
+      documentTitle: 'docName',
+      documentID: 'doc-number',
       user: mongoose.Types.ObjectId(),
-      lostPlace: {
+      location: {
         sector: 'sector',
         district: 'district'
       },
-      status: {
-        isLost: true
-      }
+      status: 'lost'
     };
 
     const newDoc = new LostItems(doc);

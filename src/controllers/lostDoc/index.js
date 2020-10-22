@@ -192,17 +192,11 @@ const itemController = {
   },
 
   updateItem: async (req, res) => {
-    const { documentTitle, documentID, reward } = req.body;
-
     try {
       const registeredItem = await Item.findById(req.params._id);
-
       const editedItem = registeredItem.set({
-        documentTitle: documentTitle || registeredItem.documentTitle,
-        documentID: documentID || registeredItem.documentID,
-        reward: reward || registeredItem.reward
+        ...req.body
       });
-
       const result = await editedItem.save();
       return res.status(201).send({
         msg: `Document with number ${result.documentID} updated successfully`,
