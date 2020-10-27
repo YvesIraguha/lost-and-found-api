@@ -1,40 +1,25 @@
 import mongoose, { Schema } from 'mongoose';
 
 const LostSchema = new Schema({
-  documentName: {
+  documentTitle: {
     type: String,
     required: true
   },
-  documentNumber: String,
+  documentID: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  foundsBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
   status: {
-    isFound: Boolean,
-    isLost: Boolean
+    type: String,
+    enum: ['lost', 'found', 'delivered']
   },
-  lostPlace: {
+  location: {
     sector: String,
     district: String
   },
-  foundPlace: {
-    sector: String,
-    district: String
-  },
-  isRewarded: {
-    type: Boolean,
-    default: false
-  },
-  price: {
-    type: Number,
-    required() {
-      return this.isRewarded;
-    }
+  reward: {
+    type: Number
   },
   date: {
     type: Date,

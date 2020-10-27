@@ -28,8 +28,8 @@ describe('LOST ITEM', () => {
         };
 
         const doc = {
-          documentName: 'docName',
-          documentNumber: 'doc-number',
+          documentTitle: 'docName',
+          documentID: 'doc-number',
           sector: 'sector',
           district: 'district'
         };
@@ -41,11 +41,10 @@ describe('LOST ITEM', () => {
           .send(doc);
         expect(res.status).toBe(201);
         expect(res.body).toHaveProperty('newDoc');
-        expect(res.body.newDoc.documentName).toBe(doc.documentName);
-        expect(res.body.newDoc.documentNumber).toBe(doc.documentNumber);
+        expect(res.body.newDoc.documentTitle).toBe(doc.documentTitle);
+        expect(res.body.newDoc.documentID).toBe(doc.documentID);
         done();
       } catch (error) {
-        console.log(error.message);
         done(error);
       }
     });

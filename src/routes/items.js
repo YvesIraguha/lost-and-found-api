@@ -1,7 +1,11 @@
 import express from 'express';
 import authentication from '../middlewares/authentication';
 import itemController from '../controllers/lostDoc/index';
-import { docValidation, editValidation } from '../middlewares/docValidation';
+import {
+  docValidation,
+  editValidation,
+  validateId
+} from '../middlewares/docValidation';
 
 const lostRouter = express.Router();
 
@@ -11,11 +15,18 @@ lostRouter
   .get('/lost', authentication, itemController.getAllLost)
   .get('/found', authentication, itemController.getAllFound)
   .get('/:_id', authentication, itemController.getItem)
-  .put('/lost/:_id', authentication, editValidation, itemController.updateItem)
+  .put(
+    '/lost/:_id',
+    authentication,
+    editValidation,
+    validateId,
+    itemController.updateItem
+  )
   .put(
     '/found/:_id',
     authentication,
     editValidation,
+    validateId,
     itemController.updateItem
   );
 
