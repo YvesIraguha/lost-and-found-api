@@ -4,6 +4,7 @@ import itemController from '../controllers/lostDoc/index';
 import {
   docValidation,
   editValidation,
+  validateBatchUpdate,
   validateId
 } from '../middlewares/docValidation';
 
@@ -16,18 +17,12 @@ lostRouter
   .get('/found', authentication, itemController.getAllFound)
   .get('/:_id', authentication, itemController.getItem)
   .put(
-    '/lost/:_id',
+    '/:_id',
     authentication,
     editValidation,
     validateId,
     itemController.updateItem
   )
-  .put(
-    '/found/:_id',
-    authentication,
-    editValidation,
-    validateId,
-    itemController.updateItem
-  );
+  .put('/', authentication, validateBatchUpdate, itemController.batchUpdates);
 
 export default lostRouter;
