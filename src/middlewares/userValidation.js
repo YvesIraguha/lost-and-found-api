@@ -16,8 +16,8 @@ export const signUpValidation = (req, res, next) => {
 
 export const loginValidation = (req, res, next) => {
   const schema = Joi.object().keys({
-    username: Joi.string().min(4).required(),
-    email: Joi.string().required().email(),
+    username: Joi.string().min(4),
+    email: Joi.string().required().email().required(),
     password: Joi.string().min(6).required()
   });
   const { error } = schema.validate(req.body);
