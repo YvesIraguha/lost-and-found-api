@@ -36,3 +36,13 @@ export const profileValidation = (req, res, next) => {
   if (error) return res.status(400).json({ msg: error.details[0].message });
   return next();
 };
+
+export const photoValidation = (req, res, next) => {
+  const schema = Joi.object({
+    photoUrl: Joi.string().required().uri()
+  });
+
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send({ error: error.details[0].message });
+  return next();
+};
