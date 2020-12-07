@@ -3,6 +3,7 @@ import Profile from '../controllers/profile/updateProfile';
 import upload from '../middlewares/multer';
 import authentication from '../middlewares/authentication';
 import { profileValidation } from '../middlewares/userValidation';
+import asyncHandler from '../middlewares/asyncHandler';
 
 const profileRouter = new Router();
 
@@ -11,8 +12,13 @@ profileRouter
     '/image',
     authentication,
     upload.single('profilePicture'),
-    Profile.profileImage
+    asyncHandler(Profile.profileImage)
   )
-  .put('/', authentication, profileValidation, Profile.updateProfile);
+  .put(
+    '/',
+    authentication,
+    profileValidation,
+    asyncHandler(Profile.updateProfile)
+  );
 
 export default profileRouter;
