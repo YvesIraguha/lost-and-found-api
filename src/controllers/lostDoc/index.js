@@ -205,6 +205,28 @@ const itemController = {
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
+  },
+
+  batchUpdates: async (req, res) => {
+    try {
+      const { items } = req.body;
+      const updatedItems = await Promise.all(
+        items.map(async (record) => {
+          const registeredRecord = await Item.findById(record._id);
+          const editedItem = registeredRecord.set({
+            ...record
+          });
+          const result = await editedItem.save();
+          return result;
+        })
+      );
+      return res.status(201).send({
+        msg: 'Documents updated successfully',
+        updatedItems
+      });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   }
 };
 

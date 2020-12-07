@@ -4,30 +4,41 @@ import itemController from '../controllers/lostDoc/index';
 import {
   docValidation,
   editValidation,
+  validateBatchUpdate,
   validateId
 } from '../middlewares/docValidation';
+import asyncHandler from '../middlewares/asyncHandler';
 
 const lostRouter = express.Router();
 
 lostRouter
-  .post('/lost', authentication, docValidation, itemController.recordLostItem)
-  .post('/found', authentication, docValidation, itemController.recordFoundItem)
-  .get('/lost', authentication, itemController.getAllLost)
-  .get('/found', authentication, itemController.getAllFound)
-  .get('/:_id', authentication, itemController.getItem)
+  .post(
+    '/lost',
+    authentication,
+    docValidation,
+    asyncHandler(itemController.recordLostItem)
+  )
+  .post(
+    '/found',
+    authentication,
+    docValidation,
+    asyncHandler(itemController.recordFoundItem)
+  )
+  .get('/lost', authentication, asyncHandler(itemController.getAllLost))
+  .get('/found', authentication, asyncHandler(itemController.getAllFound))
+  .get('/:_id', authentication, asyncHandler(itemController.getItem))
   .put(
-    '/lost/:_id',
+    '/:_id',
     authentication,
     editValidation,
     validateId,
-    itemController.updateItem
+    asyncHandler(itemController.updateItem)
   )
   .put(
-    '/found/:_id',
+    '/',
     authentication,
-    editValidation,
-    validateId,
-    itemController.updateItem
+    validateBatchUpdate,
+    asyncHandler(itemController.batchUpdates)
   );
 
 export default lostRouter;
