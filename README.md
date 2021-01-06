@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.com/YvesIraguha/LostAndFound.API.svg?branch=develop)](https://travis-ci.com/YvesIraguha/LostAndFound.API)
-[![Coverage Status](https://coveralls.io/repos/github/YvesIraguha/LostAndFound.API/badge.svg?branch=ch-setup-circle-ci-%23171923573)](https://coveralls.io/github/YvesIraguha/LostAndFound.API?branch=ch-setup-circle-ci-%23171923573)
-[![Maintainability](https://api.codeclimate.com/v1/badges/2ea6c7fa115855d90017/maintainability)](https://codeclimate.com/github/YvesIraguha/LostAndFound.API/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/2ea6c7fa115855d90017/test_coverage)](https://codeclimate.com/github/YvesIraguha/LostAndFound.API/test_coverage)
+[![Build Status](https://travis-ci.com/YvesIraguha/lost-and-found-api.svg?branch=develop)](https://travis-ci.com/YvesIraguha/lost-and-found-api)
+[![Coverage Status](https://coveralls.io/repos/github/YvesIraguha/lost-and-found-api/badge.svg)](https://coveralls.io/github/YvesIraguha/lost-and-found-api)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0dae901bbd05b9beb243/maintainability)](https://codeclimate.com/github/YvesIraguha/lost-and-found-api/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0dae901bbd05b9beb243/test_coverage)](https://codeclimate.com/github/YvesIraguha/lost-and-found-api/test_coverage)
 
 # lost-and-found-api
 
