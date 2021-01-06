@@ -1,4 +1,4 @@
-export default async (cb) => async (req, res) => {
+export default (cb) => async (req, res) => {
   try {
     await cb(req, res);
   } catch (error) {

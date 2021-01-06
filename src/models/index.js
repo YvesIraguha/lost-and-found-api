@@ -19,9 +19,7 @@ const options = {
 
 mongoose
   .connect(url, options)
-  .then(() => {
-    console.log('MongoDB is connected');
-  })
+  .then(() => {})
   .catch((err) => {
     throw new Error(err);
   });

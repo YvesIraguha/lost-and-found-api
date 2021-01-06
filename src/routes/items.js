@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 import authentication from '../middlewares/authentication';
 import itemController from '../controllers/lostDoc/index';
 import {
@@ -9,7 +9,7 @@ import {
 } from '../middlewares/docValidation';
 import asyncHandler from '../middlewares/asyncHandler';
 
-const lostRouter = express.Router();
+const lostRouter = new Router();
 
 lostRouter
   .post(
