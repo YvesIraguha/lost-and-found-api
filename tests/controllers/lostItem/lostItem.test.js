@@ -30,8 +30,11 @@ describe('LOST ITEM', () => {
         const doc = {
           documentTitle: 'docName',
           documentID: 'doc-number',
-          sector: 'sector',
-          district: 'district'
+          status: 'lost',
+          location: {
+            sector: 'sector',
+            district: 'district'
+          }
         };
 
         const authToken = await token(user);
@@ -39,6 +42,7 @@ describe('LOST ITEM', () => {
           .post(endPoint)
           .set('auth-token', authToken)
           .send(doc);
+
         expect(res.status).toBe(201);
         expect(res.body).toHaveProperty('newDoc');
         expect(res.body.newDoc.documentTitle).toBe(doc.documentTitle);
