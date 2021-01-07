@@ -10,6 +10,9 @@ const profileRouter = new Router();
 
 profileRouter
   .post('/image', authentication, photoValidation, Profile.profileImage)
-  .put('/', authentication, profileValidation, Profile.updateProfile);
+  .put('/', authentication, profileValidation, Profile.updateProfile)
+  .get('/:_id', Profile.getProfile)
+  .get('/', Profile.getAllProfiles)
+  .delete('/:_id', authentication, Profile.deleteProfile);
 
 export default profileRouter;
