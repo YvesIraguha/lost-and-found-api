@@ -44,5 +44,45 @@ export default {
     } catch (error) {
       return res.status(500).send({ error: error.message });
     }
+  },
+  getProfile: async (req, res) => {
+    try {
+      const user = await User.findById(req.params._id, { password: 0 });
+
+      return res.status(200).send({
+        msg: 'success',
+        profile: user
+      });
+    } catch (error) {
+      return res.status(500).send({ error: error.message });
+    }
+  },
+  getAllProfiles: async (req, res) => {
+    try {
+      const profiles = await User.find({}, { password: 0 });
+
+      return res.status(200).send({
+        msg: 'Success',
+        profiles
+      });
+    } catch (error) {
+      return res.status(500).send({ error: error.message });
+    }
+  },
+  deleteProfile: async (req, res) => {
+    try {
+      const { deletedCount } = await User.deleteOne({ _id: req.params._id });
+
+      if (deletedCount) {
+        return res.status(200).send({
+          msg: `Profile with id ${req.params._id} successfully deleted`
+        });
+      }
+      return res.status(200).send({
+        msg: `Profile with id ${req.params._id} does not exist`
+      });
+    } catch (error) {
+      return res.status(500).send({ error: error.message });
+    }
   }
 };
