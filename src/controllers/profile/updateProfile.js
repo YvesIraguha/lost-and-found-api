@@ -78,7 +78,7 @@ export default {
           msg: `Profile with id ${req.params._id} successfully deleted`
         });
       }
-      return res.status(200).send({
+      return res.status(400).send({
         msg: `Profile with id ${req.params._id} does not exist`
       });
     } catch (error) {
