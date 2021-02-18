@@ -28,9 +28,6 @@ describe('register a lost item', () => {
 
     expect(newDoc).toBeInstanceOf(LostItems);
     expect(res.status).toHaveBeenCalledWith(403);
-    expect(res.send).toHaveBeenCalledWith({
-      msg: 'Your document was advertised before'
-    });
     done();
   });
   // it('Should return 200 if the document was found', async (done) => {

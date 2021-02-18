@@ -1,0 +1,21 @@
+{
+    "Email already exist":"Imeri yanditswe mbere",
+    "Email or Password invalid":"Imeri cyangwa ijambo ryibanga ritemewe",
+    "Invalid password":"Ijambobanga ritemewe",
+    "Logged in successfully":"Winjiye neza",
+    "Internal server error":"Ikosa rya seriveri imbere",
+    "Your document was advertised before":"Inyandiko yawe yamamajwe mbere",
+    "Document was already advertised":"Inyandiko yari imaze gutangazwa",
+    "No document with such Id found":"Nta nyandiko ifite Id nk'iyi yabonetse",
+    "No found document registered yet":"Nta nyandiko yabonetse yanditswe",
+    "No lost document registered yet":"Nta nyandiko yatakaye yanditswe",
+    "Not document with that Id":"Ntabwo inyandiko ifite iyo Id",
+    "Documents updated successfully":"Inyandiko zavuguruwe neza",
+    "Profile Picture updated successfully":"Umwirondoro Ishusho yavuguruwe neza",
+    "Info successfully updated":"Umwirondoro wavuguguruwe neza",
+    "success":"intsinzi",
+    "No such document in database":"Nta nyandiko nkiyi iri mu bubiko",
+    "Access Denied":"Kwinjira byanze",
+    "Invalid Token":"Byemewe",
+    "Document not found!":"Inyandiko ntizabonetse!"
+}

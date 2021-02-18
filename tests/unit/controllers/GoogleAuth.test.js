@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import mongoose from 'mongoose';
 import { mockResponse, mockRequest } from '../util/interceptor';
 import controller from '../../../src/controllers/authentication';
@@ -30,7 +31,6 @@ describe('Google Auth', () => {
     await controller.googleAuthController(req, res);
 
     expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.json).toHaveBeenCalledWith({ msg: 'Internal error,' });
     done();
   });
 });

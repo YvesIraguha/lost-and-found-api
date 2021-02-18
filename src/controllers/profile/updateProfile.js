@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import User from '../../models/user';
 
 export default {
@@ -10,7 +11,7 @@ export default {
       );
 
       return res.status(200).send({
-        msg: 'Profile Picture updated successfully',
+        msg: res.__('Profile Picture updated successfully'),
         user: {
           firstName: user.firstName,
           secondName: user.secondName,
@@ -33,7 +34,7 @@ export default {
 
       const result = await user.save();
       return res.status(200).send({
-        msg: 'Info successfully updated',
+        msg: res.__('Info successfully updated'),
         result: {
           firstName: result.firstName,
           secondName: result.secondName,
@@ -50,7 +51,7 @@ export default {
       const user = await User.findById(req.params._id, { password: 0 });
 
       return res.status(200).send({
-        msg: 'success',
+        msg: res.__('success'),
         profile: user
       });
     } catch (error) {
@@ -62,7 +63,7 @@ export default {
       const profiles = await User.find({}, { password: 0 });
 
       return res.status(200).send({
-        msg: 'Success',
+        msg: res.__('Success'),
         profiles
       });
     } catch (error) {

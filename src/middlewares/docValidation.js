@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import Joi from '@hapi/joi';
 import mongoose from 'mongoose';
 import models from '../models/index';
@@ -44,7 +45,7 @@ export const validateId = async (req, res, next) => {
   const registeredItem = await Item.findById(req.params._id);
 
   if (!registeredItem) {
-    return res.status(404).json({ error: 'Document not found!' });
+    return res.status(404).json({ error: res.__('Document not found!') });
   }
   return next();
 };
