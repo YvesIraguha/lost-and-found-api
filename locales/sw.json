@@ -1,0 +1,21 @@
+{
+    "Email already exist":"Barua pepe tayari inapatikana!",
+    "Email or Password invalid":"Barua pepe au Nenosiri ni batili",
+    "Invalid password":"Nenosiri si sahihi",
+    "Logged in successfully":"Umeingia kwa mafanikio",
+    "Internal server error":"Hitilafu ya seva ya ndani",
+    "Your document was advertised before":"Hati yako ilitangazwa hapo awali",
+    "Document was already advertised":"Hati ilikuwa tayari imetangazwa",
+    "No document with such Id found":"Hakuna hati iliyo na kitambulisho kama hicho iliyopatikana",
+    "No found document registered yet":"Hakuna hati iliyopatikana iliyosajiliwa bado",
+    "No lost document registered yet":"Hakuna hati iliyopotea iliyosajiliwa bado",
+    "Not document with that Id":"Sio hati na kitambulisho hicho",
+    "Documents updated successfully":"Hati zimesasishwa kwa mafanikio",
+    "Profile Picture updated successfully":"Picha ya Profaili imesasishwa kwa mafanikio",
+    "Info successfully updated":"Maelezo yamefanikiwa kusasishwa",
+    "success":"mafanikio",
+    "No such document in database":"Hakuna hati kama hiyo kwenye hifadhidata",
+    "Access Denied":"Ufikiaji Umekataliwa",
+    "Invalid Token":"Ishara batili",
+    "Document not found!":"Hati haikupatikana!"
+}

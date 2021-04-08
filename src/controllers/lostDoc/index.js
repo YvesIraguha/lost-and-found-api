@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import sgMail from '@sendgrid/mail';
 import models from '../../models/index';
 import emailNotification from '../../helpers/sendEmail';
@@ -7,7 +8,9 @@ const { LostItems: Item } = models;
 const itemController = {
   recordLostItem: async (req, res) => {
     try {
-      const { documentTitle, documentID, location, reward, status } = req.body;
+      const {
+        documentTitle, documentID, location, reward, status
+      } = req.body;
       const adDoc = await Item.findOne({
         documentTitle,
         documentID,
@@ -17,7 +20,7 @@ const itemController = {
       if (adDoc) {
         return res
           .status(403)
-          .send({ msg: 'Your document was advertised before' });
+          .send({ msg: res.__('Your document was advertised before') });
       }
 
       const foundDoc = await Item.findOne({
@@ -60,7 +63,9 @@ const itemController = {
 
   recordFoundItem: async (req, res) => {
     try {
-      const { documentTitle, documentID, location, reward, status } = req.body;
+      const {
+        documentTitle, documentID, location, reward, status
+      } = req.body;
 
       const registerDoc = await Item.findOne({
         documentTitle,
@@ -68,7 +73,7 @@ const itemController = {
         status: 'found'
       });
       if (registerDoc) {
-        return res.status(403).send({ msg: 'Document was already advertised' });
+        return res.status(403).send({ msg: res.__('Document was already advertised') });
       }
 
       const lostDoc = await Item.findOne({
@@ -130,7 +135,7 @@ const itemController = {
       if (!deleteDoc) {
         return res
           .status(404)
-          .send({ error: 'No document with such Id found' });
+          .send({ error: res.__('No document with such Id found') });
       }
 
       return res.status(201).send({
@@ -150,7 +155,7 @@ const itemController = {
       if (!allFoundItems) {
         return res
           .status(404)
-          .json({ error: 'No found document registered yet' });
+          .json({ error: res.__('No found document registered yet') });
       }
 
       return res.status(200).json({ allFoundItems });
@@ -167,7 +172,7 @@ const itemController = {
       if (!allLostItems) {
         return res
           .status(404)
-          .json({ error: 'No lost document registered yet' });
+          .json({ error: res.__('No lost document registered yet') });
       }
 
       return res.status(200).json({ allLostItems });
@@ -183,7 +188,7 @@ const itemController = {
         _id
       });
       if (!lostItem) {
-        return res.status(404).json({ error: 'Not document with that Id' });
+        return res.status(404).json({ error: res.__('Not document with that Id') });
       }
       return res.status(200).json({ lostItem });
     } catch (err) {
@@ -221,7 +226,7 @@ const itemController = {
         })
       );
       return res.status(201).send({
-        msg: 'Documents updated successfully',
+        msg: res.__('Documents updated successfully'),
         updatedItems
       });
     } catch (err) {

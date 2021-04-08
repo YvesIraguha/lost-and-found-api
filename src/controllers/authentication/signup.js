@@ -1,10 +1,11 @@
+/* eslint-disable no-underscore-dangle */
 import hashPassword from '../../helpers/hashPwd';
 import createToken from '../../helpers/token';
 import User from '../../models/user';
 
 const signupController = async (req, res) => {
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send({ msg: 'Email already exist' });
+  if (emailExist) return res.status(400).send({ msg: res.__('Email already exist') });
 
   const hashedPassword = await hashPassword(req.body.password);
 

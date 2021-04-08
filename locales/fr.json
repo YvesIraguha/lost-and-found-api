@@ -1,0 +1,21 @@
+{
+    "Email already exist":"L'e-mail existe déjà",
+    "Email or Password invalid":"E-mail ou mot de passe invalide",
+    "Invalid password":"Mot de passe incorrect",
+    "Logged in successfully":"Connecté avec succès",
+    "Internal server error":"Erreur Interne du Serveur",
+    "Your document was advertised before":"Votre document a déjà été annoncé",
+    "Document was already advertised":"Le document a déjà été annoncé",
+    "No document with such Id found":"Aucun document avec un tel identifiant n'a été trouvé",
+    "No found document registered yet":"Aucun document trouvé enregistré pour le moment",
+    "No lost document registered yet":"Aucun document perdu enregistré pour le moment",
+    "Not document with that Id":"Pas de document avec cet identifiant",
+    "Documents updated successfully":"Documents mis à jour avec succès",
+    "Profile Picture updated successfully":"Photo de profil mise à jour avec succès",
+    "Info successfully updated":"Informations mises à jour avec succès",
+    "success":"Succès",
+    "No such document in database":"Aucun document de ce type dans la base de données",
+    "Access Denied":"Accès refusé",
+    "Invalid Token":"Jeton Invalide",
+    "Document not found!":"Document introuvable!"
+}
