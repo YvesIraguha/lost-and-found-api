@@ -19,8 +19,16 @@ A platform for registering what you have lost and what you found to help each ot
 
 - Clone this repo
 - cd to root directory
+### Running on docker container
+
+- Build the image `docker-compose build`
+- The the container `docker-compose up`
+
+### For local installation
 - Install all dependencies `npm install`
 - Start the server `npm run dev`
+
+
 
 ## Models
 
@@ -69,8 +77,8 @@ A platform for registering what you have lost and what you found to help each ot
 
 ## Endpoints
 
-- Signup: `/api/v1/users/auth/signup`
-- Login: `/api/v1/users/auth/login`
+- Signup: `/api/v1/users/signup`
+- Login: `/api/v1/users/login`
 - Google Auth: `/api/v1/users/auth/google`
 - lost document recording: `/api/v1/items/lost`
 - found document recording: `/api/v1/items/found`

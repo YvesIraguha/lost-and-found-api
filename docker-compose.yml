@@ -14,13 +14,30 @@ services:
       - DB_PORT_DEV=$DB_PORT_DEV
       - DB_NAME_DEV=$DB_NAME_DEV
     ports:
-      - '8080:3000'
+      - '3000:3000'
     links:
+      - mongo
+    depends_on:
       - mongo
     volumes:
       - .:/usr/src/app
   mongo:
     container_name: mongo
+    restart: always
     image: mongo
     ports:
       - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
+    driver: local
