@@ -10,6 +10,10 @@ const LostSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  foundsBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   status: {
     type: String,
     enum: ['lost', 'found', 'delivered']
@@ -26,6 +30,8 @@ const LostSchema = new Schema({
     default: new Date()
   }
 });
+
+LostSchema.index({ '$**': 'text' });
 
 const document = mongoose.model('LostItems', LostSchema);
 

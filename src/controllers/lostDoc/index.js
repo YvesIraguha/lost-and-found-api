@@ -150,8 +150,10 @@ const itemController = {
   getAllLost: async (req, res) => {
     try {
       const allFoundItems = await Item.find({
-        status: 'found'
-      });
+        status: 'lost'
+      })
+        .populate('user', 'username email phoneNumber -_id')
+        .populate('foundsBy', 'username email phoneNumber -_id');
       if (!allFoundItems) {
         return res
           .status(404)
@@ -167,8 +169,10 @@ const itemController = {
   getAllFound: async (req, res) => {
     try {
       const allLostItems = await Item.find({
-        status: 'lost'
-      });
+        status: 'found'
+      })
+        .populate('user', 'username email phoneNumber -_id')
+        .populate('foundsBy', 'username email phoneNumber -_id');
       if (!allLostItems) {
         return res
           .status(404)
@@ -186,7 +190,9 @@ const itemController = {
       const { _id } = req.params;
       const lostItem = await Item.findOne({
         _id
-      });
+      })
+        .populate('user', 'username email phoneNumber -_id')
+        .populate('foundsBy', 'username email phoneNumber -_id');
       if (!lostItem) {
         return res.status(404).json({ error: res.__('Not document with that Id') });
       }
