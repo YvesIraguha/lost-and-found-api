@@ -5,7 +5,6 @@ import routes from './routes/items';
 import socialAuthRoutes from './routes/googleAuth';
 import emailAuthRoutes from './routes/auth';
 import profileRouter from './routes/profile';
-import searchRouter from './routes/searchDoc/search';
 import i18n from './helpers/i18n';
 
 const app = express();
@@ -23,7 +22,6 @@ app.use('/api/v1/items', routes);
 app.use('/api/v1/users', emailAuthRoutes);
 app.use('/api/v1/users/auth', socialAuthRoutes);
 app.use('/api/v1/profiles', profileRouter);
-app.use('/api/v1/search/documents', searchRouter);
 
 app.use('*', (req, res) =>
   // eslint-disable-next-line implicit-arrow-linebreak

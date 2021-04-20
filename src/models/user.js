@@ -10,10 +10,17 @@ const User = mongoose.Schema({
   firstName: String,
   secondName: String,
   photoUrl: String,
-  email: String,
+  email: {
+    type: String,
+    lowercase: true,
+    trim: true,
+    unique: true
+  },
   password: {
     type: String,
-    required() { return this.platform === 'email'; }
+    required() {
+      return this.platform === 'email';
+    }
   },
   date: {
     timestamp: { type: Date, default: undefined }

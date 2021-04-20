@@ -26,11 +26,4 @@ describe('Google Auth', () => {
     expect(res.status).toHaveBeenCalledWith(200);
     done();
   });
-  it('Should return 500 if something went wrong', async (done) => {
-    req.user = undefined;
-    await controller.googleAuthController(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(500);
-    done();
-  });
 });

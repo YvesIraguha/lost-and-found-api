@@ -1,11 +1,12 @@
 /* eslint-disable no-underscore-dangle */
 import hashPassword from '../../helpers/hashPwd';
 import createToken from '../../helpers/token';
+import response from '../../helpers/response';
 import User from '../../models/user';
 
 const signupController = async (req, res) => {
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send({ msg: res.__('Email already exist') });
+  if (emailExist) return response.error(res, 'Email already exist', 409);
 
   const hashedPassword = await hashPassword(req.body.password);
 
@@ -21,21 +22,24 @@ const signupController = async (req, res) => {
       timestamp: new Date()
     }
   });
-  try {
-    const newUser = await user.save();
-    const token = await createToken(newUser);
-    const {
-      firstName,
-      secondName,
-      username,
-      email,
-      phoneNumber,
-      date: createdAt,
-      _id
-    } = newUser;
-    return res.status(201).send({
+
+  const newUser = await user.save();
+  const token = await createToken(newUser);
+  const {
+    firstName,
+    secondName,
+    username,
+    email,
+    phoneNumber,
+    date: createdAt,
+    _id
+  } = newUser;
+  return response.success(
+    res,
+    'You are account has been created successfuly',
+    {
       token,
-      body: {
+      user: {
         firstName,
         secondName,
         username,
@@ -44,10 +48,9 @@ const signupController = async (req, res) => {
         createdAt,
         _id
       }
-    });
-  } catch (err) {
-    return res.status(400).send({ err: err.message });
-  }
+    },
+    201
+  );
 };
 
 export default signupController;

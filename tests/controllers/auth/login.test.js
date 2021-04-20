@@ -36,9 +36,9 @@ describe('Login', () => {
         password: 'password'
       };
       const res = await request(server).post(endPoint).send(user);
-      expect(res.status).toBe(400);
-      expect(res.body).toHaveProperty('msg');
-      expect(res.body.msg).toMatch(/invalid/i);
+      expect(res.status).toBe(403);
+      expect(res.body).toHaveProperty('error');
+      expect(res.body.error).toMatch(/incorrect/i);
       done();
     });
     it("Should warn a user if password didn't match", async (done) => {
@@ -48,10 +48,10 @@ describe('Login', () => {
         password: 'wrongPass'
       };
       const res = await request(server).post(endPoint).send(user);
-      expect(res.status).toBe(400);
-      expect(res.body).toHaveProperty('msg');
-      expect(res.body.msg).toMatch(/Invalid/);
-      expect(res.body.msg).toMatch(/password/);
+      expect(res.status).toBe(403);
+      expect(res.body).toHaveProperty('error');
+      expect(res.body.error).toMatch(/incorrect/);
+      expect(res.body.error).toMatch(/password/);
       done();
     });
     it('Should  allow user to login if account found', async (done) => {
@@ -62,8 +62,8 @@ describe('Login', () => {
       };
       const res = await request(server).post(endPoint).send(account);
       expect(res.status).toBe(200);
-      expect(res.body).toHaveProperty('token');
-      expect(res.body).toHaveProperty('msg');
+      expect(res.body).toHaveProperty('data');
+      expect(res.body).toHaveProperty('message');
       done();
     });
   });

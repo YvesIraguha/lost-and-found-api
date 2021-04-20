@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 module.exports = {
   mockRequest: () => {
     const req = {};
@@ -8,6 +9,7 @@ module.exports = {
 
   mockResponse: () => {
     const res = {};
+    res.__ = jest.fn().mockReturnValue(res);
     res.send = jest.fn().mockReturnValue(res);
     res.status = jest.fn().mockReturnValue(res);
     res.json = jest.fn().mockReturnValue(res);

@@ -1,8 +1,9 @@
-/* eslint-disable no-underscore-dangle */
+import response from '../helpers/response';
+
 export default (cb) => async (req, res) => {
   try {
-    await cb(req, res);
+    return await cb(req, res);
   } catch (error) {
-    res.status(500).send({ message: res.__('Internal server error') });
+    return response.error(res, 'Internal server error', 500);
   }
 };

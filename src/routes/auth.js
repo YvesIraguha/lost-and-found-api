@@ -4,10 +4,11 @@ import {
   loginValidation
 } from '../middlewares/userValidation';
 import controller from '../controllers/authentication';
+import asyncHandler from '../middlewares/asyncHandler';
 
 const authRouter = new Router();
 
 authRouter
-  .post('/signUp', signUpValidation, controller.signupController)
-  .post('/login', loginValidation, controller.loginController);
+  .post('/signUp', signUpValidation, asyncHandler(controller.signupController))
+  .post('/login', loginValidation, asyncHandler(controller.loginController));
 export default authRouter;

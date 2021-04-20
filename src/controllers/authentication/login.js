@@ -2,20 +2,17 @@
 import bcrypt from 'bcryptjs';
 import createToken from '../../helpers/token';
 import User from '../../models/user';
+import response from '../../helpers/response';
 
 const loginController = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send({ msg: res.__('Email or Password invalid') });
+  if (!user) return response.error(res, 'Email or password incorrect', 403);
 
-  try {
-    const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).send({ msg: res.__('Invalid password') });
+  const validPass = await bcrypt.compare(req.body.password, user.password);
+  if (!validPass) return response.error(res, 'Email or password incorrect', 403);
 
-    const token = await createToken(user);
-    return res.status(200).send({ msg: res.__('Logged in successfully'), token });
-  } catch (error) {
-    return res.status(400).send({ error: error.message });
-  }
+  const token = await createToken(user);
+  return response.success(res, 'Logged in successfully', { token });
 };
 
 export default loginController;

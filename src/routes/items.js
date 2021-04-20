@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import authentication from '../middlewares/authentication';
-import itemController from '../controllers/lostDoc/index';
+import itemController from '../controllers/items';
 import {
   docValidation,
   editValidation,
@@ -39,6 +39,7 @@ lostRouter
     authentication,
     validateBatchUpdate,
     asyncHandler(itemController.batchUpdates)
-  );
+  )
+  .get('/search', authentication, asyncHandler(itemController.searchItem));
 
 export default lostRouter;
