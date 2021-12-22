@@ -8,6 +8,7 @@
     "@hapi/joi": "^17.1.1",
     "@sendgrid/mail": "^7.2.1",
     "apollo-server-lambda": "^3.5.0",
+    "aws-sdk": "^2.1048.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -25,6 +26,7 @@
     "@babel/node": "^7.10.5",
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
+    "babel-loader": "^8.2.3",
     "coveralls": "^3.1.0",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
@@ -32,7 +34,11 @@
     "eslint-plugin-import": "^2.20.2",
     "jest": "^25.3.0",
     "nodemon": "^2.0.2",
-    "supertest": "^4.0.2"
+    "serverless": "^2.69.1",
+    "serverless-offline": "^8.3.1",
+    "serverless-webpack": "^5.6.0",
+    "supertest": "^4.0.2",
+    "webpack-node-externals": "^3.0.0"
   },
   "jest": {
     "verbose": true,
@@ -46,7 +52,9 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": "rm -rf dist && babel src --out-dir ./dist --source-maps",
     "start": "node dist/index.js",
-    "dev": "nodemon --exec babel-node src/index.js"
+    "start:local": "sls offline --region us-east-1",
+    "dev": "nodemon --exec babel-node src/index.js",
+    "deploy:dev": "sls deploy -r us-east-1"
   },
   "repository": {
     "type": "git",

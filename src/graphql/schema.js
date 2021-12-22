@@ -1,27 +1,33 @@
-type Item {
-    name: String! 
-    item_id: String! 
+import { gql } from 'apollo-server-lambda';
+
+const typeDefs = gql`
+  type Item {
+    name: String!
+    item_id: String!
     location: Location!
-    status: String! 
-    date: String! 
+    status: String!
+    date: String!
     id: String!
     reward: String
-}
+  }
 
-type Location {
+  type Location {
     sector: String
-    district: String 
-    village: String 
-    cell: String 
-    province: String 
+    district: String
+    village: String
+    cell: String
+    province: String
     coordinates: Coordinates
-}
+  }
 
-type Coordinates{
+  type Coordinates {
     longitude: String!
     latitude: String!
-}
+  }
 
-type Query {
+  type Query {
     getAllItems(status: String!): [Item!]!
-}
+  }
+`;
+
+export default typeDefs;

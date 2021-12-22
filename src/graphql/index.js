@@ -1,18 +1,29 @@
-import { graphqlLambda, graphiqlLambda } from 'apollo-server-lambda';
-import { makeExecutableSchema } from 'graphql-tools';
-import { schema } from './schema';
-import { resolvers } from './resolvers';
+import { ApolloServer } from 'apollo-server-lambda';
+import schema from './schema';
+import resolvers from './resolvers';
+import DynamoConnector from './dynamoConnector';
+import Item from './model';
 
-const graphQLSchema = makeExecutableSchema({ typeDefs: schema, resolvers });
+const dynamoConnector = new DynamoConnector({
+  tableName: process.env.SINGLE_TABLE_NAME,
+  options: { region: process.env.SERVERLESS_REGION }
+});
 
-const handle = async (event, context, callback) => {
-  const callbackWithHeaders = (error, output) => {
-    // eslint-disable-next-line no-param-reassign
-    output.headers['Access-Control-Allow-Origin'] = '*';
-    callback(error, output);
-  };
-  const handler = graphqlLambda({ schema: graphQLSchema });
-  return handler(event, context, callbackWithHeaders);
-};
+const handler = new ApolloServer({
+  typeDefs: schema,
+  resolvers,
+  context: ({ event, context }) => ({
+    headers: event.headers,
+    event,
+    context,
+    models: {
+      Items: new Item(dynamoConnector)
+    }
+  })
+}).createHandler({
+  cors: { credentials: true, origin: '*' }
+});
+
+export const handle = (event, context, cb) => handler(event, context, cb);
 
 export default handle;
