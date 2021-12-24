@@ -23,11 +23,38 @@ export default class DynamoConnector {
     return this.docClient.query(queryParams).promise();
   }
 
+  getItem(id) {
+    const getParams = {
+      TableName: this.tableName,
+      Key: {
+        pk: 'item',
+        sk: id
+      }
+    };
+
+    return this.docClient.get(getParams).promise();
+  }
+
   putItem(params) {
     const queryParams = {
       TableName: this.tableName,
       Item: params
     };
     return this.docClient.put(queryParams).promise();
+  }
+
+  deleteItem(id) {
+    const params = {
+      TableName: this.tableName,
+      Key: {
+        pk: 'item',
+        sk: id
+      },
+      ReturnValues: 'ALL_OLD'
+    };
+    return this.docClient
+      .delete(params)
+      .promise()
+      .then((response) => response.Attributes);
   }
 }

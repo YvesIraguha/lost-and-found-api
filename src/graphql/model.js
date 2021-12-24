@@ -13,18 +13,38 @@ class Item {
     return results.Items;
   }
 
+  async getOneItem(id) {
+    const results = await this.dynamoConnector.getItem(id);
+    return results.Item;
+  }
+
   async addItem(itemInput) {
     const { input } = itemInput;
     const id = uuid();
     const queryParams = {
       pk: 'item',
-      sk: input.itemId,
-      id,
-      createdAt: new Date().toISOString(),
+      sk: id,
+      updatedAt: new Date().toISOString(),
       ...input
     };
     await this.dynamoConnector.putItem(queryParams);
     return queryParams;
+  }
+
+  async updateItem(id, input) {
+    const queryParams = {
+      pk: 'item',
+      sk: id,
+      updatedAt: new Date().toISOString(),
+      ...input
+    };
+    await this.dynamoConnector.putItem(queryParams);
+    return queryParams;
+  }
+
+  async deleteItem(id) {
+    const results = await this.dynamoConnector.deleteItem(id);
+    return results;
   }
 }
 

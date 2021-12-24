@@ -6,8 +6,8 @@ const typeDefs = gql`
     itemId: String!
     location: Location!
     status: String!
-    createdAt: String!
-    id: String!
+    updatedAt: String!
+    sk: String!
     reward: String
   }
 
@@ -49,10 +49,13 @@ const typeDefs = gql`
 
   type Query {
     getAllItems(status: String!): [Item!]!
+    getItem(id: String!): Item
   }
 
   type Mutation {
     addItem(input: AddItemInput): Item!
+    updateItem(id: String!, input: AddItemInput): Item!
+    deleteItem(id: String!): Item
   }
 `;
 
