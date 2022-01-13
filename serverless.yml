@@ -28,7 +28,6 @@ custom:
 plugins:
   - serverless-offline
   - serverless-webpack
-
 functions:
   graphql:
     handler: src/graphql/index.handle
