@@ -17,6 +17,7 @@ provider:
         - dynamodb:Query
         - dynamodb:GetItem
         - dynamodb:UpdateItem
+        - dynamodb:PutItem
         - dynamodb:BatchWriteItem
         - dynamodb:DeleteItem
       Resource:
