@@ -24,6 +24,8 @@ provider:
 
 custom:
   tableName: itemsTable
+  webpack:
+    includeModules: true
 
 plugins:
   - serverless-offline
