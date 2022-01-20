@@ -1,0 +1,60 @@
+service: lost-and-found-serverless-stack
+
+frameworkVersion: '2 || 3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  profile: yves-sandbox
+  environment:
+    SINGLE_TABLE_NAME: ${self:custom.tableName}
+    SERVERLESS_REGION: ${opt:region}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:PutItem
+        - dynamodb:BatchWriteItem
+        - dynamodb:DeleteItem
+      Resource:
+        - Fn::GetAtt: [ItemsTable, Arn]
+
+custom:
+  tableName: itemsTable
+  webpack:
+    includeModules: true
+
+plugins:
+  - serverless-offline
+  - serverless-webpack
+functions:
+  graphql:
+    handler: src/graphql/index.handle
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+resources:
+  Resources:
+    ItemsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: pk
+            AttributeType: S
+          - AttributeName: sk
+            AttributeType: S
+        KeySchema:
+          - AttributeName: pk
+            KeyType: HASH
+          - AttributeName: sk
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES

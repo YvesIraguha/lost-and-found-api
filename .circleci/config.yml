@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.1.0
+  aws-cli: circleci/aws-cli@2.0.3
+jobs:
+  build:
+    executor: aws-cli/default
+    docker:
+      - image: circleci/node:12
+    steps:
+      - aws-cli/install
+      - aws-cli/setup:
+          profile-name: yves-sandbox
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - dependencies-cache-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - dependencies-cache
+
+      - run:
+          name: Install Serverless CLI and dependencies
+          command: |
+            sudo npm i -g serverless
+            npm install
+
+      - run:
+          name: Deploy application
+          command: npm run deploy:dev
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: dependencies-cache-{{ checksum "package.json" }}
+workflows:
+  main:
+    jobs:
+      - build:
+          context:
+            - rhinos
